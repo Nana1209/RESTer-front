@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>rester-web</title>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/chosen/1.8.2/chosen.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+  <script src="https://cdn.bootcss.com/chosen/1.8.2/chosen.jquery.js"></script>
+  <script src="static/canvas2image.js"></script>
+  <script src="static/html2canvas.js"></script>
+  <script src="static/jspdf.debug.js"></script>
+  <script type="text/javascript">
+
+  </script>
+  <script type="text/javascript">
+    function cateResult() {
+      $.ajax({
+
+        type: 'get',
+        url: 'http://localhost:8080/empirical-result',
+        data: $('#cateForm').serialize(),
+        success: function (data) {
+          //alert(JSON.stringify(data));
+          validateResult=JSON.parse(data);
+          replaceFunc();
+          /*pushDom(JSON.parse(data));*/
+
+        },
+        error: function (data) {
+          alert(JSON.stringify(data));
+        }
+      });
+
+      /*function pushDom(data) {
+          // 然后再交给 vue 进行渲染
+          var vm = new Vue({
+              el: '#app',
+              data: data
+          })
+      }*/
+      function replaceFunc () {
+
+
+        function pie() {
+          var option = {
+            title: {
+              text: 'HTTP Method Usage',
+              subtext: '',
+              x: 'center'
+            },
+            tooltip: {
+              trigger: 'item',
+              formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+              orient: 'vertical',
+              left: 'left',
+              data: ['GET', 'POST', 'DELETE','PUT','HEAD','PATCH','OPTIONS','TRACE']
+            },
+            series: [
+              {
+                name: 'Usage ratio',
+                type: 'pie',
+                radius: '50%',
+                center: ['50%', '50%'],
+                label: {
+                  position: 'inner'
+                },
+                data: [
+                  {value: validateResult.categoryResult[2], name: 'GET'},
+                  {value: validateResult.categoryResult[3], name: 'POST'},
+                  {value: validateResult.categoryResult[4], name: 'DELETE'},
+                  {value: validateResult.categoryResult[5], name: 'PUT'},
+                  {value: validateResult.categoryResult[6], name: 'HEAD'},
+                  {value: validateResult.categoryResult[7], name: 'PATCH'},
+                  {value: validateResult.categoryResult[8], name: 'OPTIONS'},
+                  {value: validateResult.categoryResult[9], name: 'TRACE'},
+                ],
+                itemStyle: {
+                  emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+                }
+              }
+            ]
+          };
+          var chart = echarts.init(document.getElementById("echarts-pie-chart"));
+          chart.setOption(option);
+        }
+
+        pie();
+        function bar() {
+          var option = {
+            title: {
+              text: 'Standard Realization Rate',
+              subtext: '',
+              x: 'center'
+            },
+            tooltip: {
+              trigger: 'item',
+              formatter: "{a} <br/>{b} : {c}%"
+            },
+            legend: {
+              orient: 'vertical',
+              left: 'left',
+              data: ['Standard Realization Rate']
+            },
+            xAxis:{
+              axisLabel: {					//---坐标轴 标签
+                show: true,					//---是否显示
+                interval: 0,                //---强制显示所有标签
+                inside: false,				//---是否朝内
+                rotate: 0,					//---旋转角度
+                margin: 5,					//---刻度标签与轴线之间的距离
+                //color:'red',				//---默认取轴线的颜色
+              },
+              data:["no_","lowercase","noVersion","noAPI","noCRUD","noSuffix","noEnd/"]
+            },
+            yAxis:{
+              name:'Rate',				//---轴名称
+              type:'value',			//---轴类型，默认'category'
+              axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value} %'
+              },
+            },
+            series: [
+              {
+                name: 'Rate',
+                type: 'bar',
+                itemStyle:{					//---图形形状
+                  barBorderRadius: [25, 25, 0, 0],
+                  color: function(params) {
+                    // build a color map as your need.
+                    var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                    return colorList[params.dataIndex]
+                  }
+
+                },
+                barWidth:'40%',
+                z:10,
+                data: [validateResult.categoryResult[13]*100,validateResult.categoryResult[14]*100,validateResult.categoryResult[15]*100,
+                  validateResult.categoryResult[16]*100,validateResult.categoryResult[17]*100,validateResult.categoryResult[18]*100,
+                  validateResult.categoryResult[19]*100]
+              }
+            ]
+          };
+          var chart = echarts.init(document.getElementById("echarts-bar-chart"));
+          chart.setOption(option);
+        }
+        bar();
+      }
+    }
+    cateResult();
+  </script>
+  <script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById("echarts-tree-chart"));
+    myChart.showLoading();
+    function tree(){
+      var data1= {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "name":"Use resource nouns to name the URI. If the resource is a business process, you need to nominalise it.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use the HTTP method to perform designated operations on network resources, so the operation method for resources does not appear in the URI, that is, no verbs appear.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use lowercase letters in path (URI).",
+                    "children":[]
+                  },
+                  {
+                    "name":"use \"-\" instead of \"_\" to split the path.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Try to use plural nouns for naming. If it is a separate resource, you can also use the singular.",
+                    "children":[]
+                  }
+                ],
+                "name": "resource naming standard "
+              },
+              {
+                "children": [
+                  {
+                    "name":"Use slash separator \"/\" to indicate a hierarchical relationship, and the trailing slash should not be included in the URL.",
+                    "children":[]
+                  },
+                  {
+                    "name":" The hierarchical relationship should conform to the real situation and semantic relationship.",
+                    "children":[]
+                  },
+                  {
+                    "name":"The nesting depth is recommended not to exceed 3 levels.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Too fine granularity of resource modeling will lead to too frequent interactions and overflow of business logic.",
+                    "children":[]
+                  },
+                  {
+                    "name":"The business process is sensitive and the system security requirements are high. It is recommended to use the coarse-grained resource design based on the business process.",
+                    "children":[]
+                  }
+                ],
+                "name": "resource structure design"
+              },
+              {
+                "children": [
+                  {
+                    "name":"Use query parameters (Page, Limit, etc.) to perform functional attributes (such as filtering response information).",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use body parameters to provide a larger amount of attribute values (in update, create operation etc.).",
+                    "children":[]
+                  },
+                  {
+                    "name":"It is recommended to support convenient indirect reference without id.",
+                    "children":[]
+                  },
+                  {
+                    "name":" It is recommended to explicitly describe the attribute dependency in the API specification file.",
+                    "children":[]
+                  }
+                ],
+                "name": "parameters design"
+              },
+              {
+                "children": [
+                  {
+                    "name":"The resource representation (file extension) should not be included in the resource naming (URI).",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use the header Content-type to indicate the format of the HTTP message.",
+                    "children":[]
+                  },
+                  {
+                    "name":"If the returned resource has multiple forms, users are supported to specify the returned resource format with header Accept.",
+                    "children":[]
+                  }
+                ],
+                "name": "Representational design"
+              }
+              ,
+              {
+                "children": [
+                  {
+                    "name":"The response body corresponding to the client request should contain self-links to indicate the relevant resources and the next feasible operation.",
+                    "children":[]
+                  }
+                ],
+                "name": "HATEOAS"
+              }
+            ],
+            "name": "resource design"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "name":"Use standard methods defined by the HTTP protocol to operate on resources.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use JSON format in the request message.",
+                    "children":[]
+                  }
+                ],
+                "name": "request"
+              },
+              {
+                "children": [
+                  {
+                    "name":" Use the response code defined by the HTTP protocol to identify the response status.",
+                    "children":[]
+                  },
+                  {
+                    "name":"Use JSON formatted message as response message and error description information.",
+                    "children":[]
+                  }
+                ],
+                "name": "response"
+              }
+            ],
+            "name": "HTTP interaction design"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "name": "It is recommended to use OAuth2 protocol for user identity authentication."
+                  }
+                ],
+                "name": "Security scheme"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "name": "Use header Cache-Control, Expires, and Date to support mandatory caching."
+                  },
+                  {
+                    "children": [],
+                    "name": "Use header ETag or Last-Modified to support negotiation caching."
+                  }
+                ],
+                "name": "Caching mechanism"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "name": " It is recommended to describe the version information in the header file."
+                  },
+                  {
+                    "children": [],
+                    "name": "Add semantic information to the version information to identify the main update content of the version."
+                  },
+                  {
+                    "children": [],
+                    "name": "Release bug fixes and feature breakthroughs separately."
+                  }
+                ],
+                "name": "Version control"
+              }
+            ],
+            "name": "Performance, non functional design"
+          }
+        ],
+        "name": "Standard"
+      };
+      myChart.hideLoading();
+      myChart.setOption(option = {
+        tooltip: {
+          trigger: 'item',
+          triggerOn: 'mousemove'
+        },
+        series: [
+          {
+            type: 'tree',
+
+            data: [data1],
+            initialTreeDepth: 4,
+            top: '1%',
+            left: '7%',
+            bottom: '1%',
+            right: '50%',
+
+            symbolSize: 7,
+
+            label: {
+              position: 'left',
+              verticalAlign: 'middle',
+              align: 'right',
+              fontSize: 15
+            },
+
+            leaves: {
+              label: {
+                position: 'right',
+                verticalAlign: 'middle',
+                align: 'left',
+              }
+            },
+            width:"40%",
+
+            expandAndCollapse: true,
+            animationDuration: 550,
+            animationDurationUpdate: 750
+          }
+        ]
+      })
+    }
+    tree();
+  </script>
+  <script type="text/javascript">
+    var validateResult={};
+    //文件上传Ajax
+    //$("#jquery_post").on("click",function(){
+    function  submitFileForm(){
+      /*var inputf=new FormData;
+      inputf.append("testfile",document.getElementById("file_upload").files[0]);*/
+      var formdata=new FormData(document.getElementById("fileupload"));
+      $.ajax({
+        url:'http://localhost:8080/restapi',
+        type:"POST",
+        dataType:"JSON",
+        //data:inputf,
+        data:formdata,
+        /*不加Ajax自动转换成字符串*/
+        contentType: false,
+        processData: false,
+        success:function (data) {
+          //pushDom(JSON.parse(data));
+          console.log("filehuidiao");
+          validateResult=data;
+          console.log("parsesuccess");
+          replaceFunc();
+        }
+      })
+    }
+
+    function urlSubmitForm() {
+
+      $.ajax({
+
+        type: 'post',
+        url: 'http://localhost:8080/restapi',
+        data: $('#urlForm').serialize(), //将表单的数据拼成标准参数模式字符串，e.g.“username=chen&nickname=alien”
+        success: function (data) {
+          //pushDom(JSON.parse(data));
+          validateResult=JSON.parse(data);
+          console.log("huidiao");
+          replaceFunc();
+
+        },
+        error: function (data) {
+          console.log("huidiao error");
+          alert(JSON.stringify(data));
+        }
+      });
+    }
+    function textSubmitForm() {
+
+      $.ajax({
+
+        type: 'post',
+        url: 'http://localhost:8080/restapi',
+        data: $('#textForm').serialize(), //将表单的数据拼成标准参数模式字符串，e.g.“username=chen&nickname=alien”
+        success: function (data) {
+          //pushDom(JSON.parse(data));
+          validateResult=JSON.parse(data);
+          console.log("huidiao");
+          replaceFunc();
+
+        },
+        error: function (data) {
+          console.log("huidiao error");
+          alert(JSON.stringify(data));
+        }
+      });
+    }
+    function clickRow(obj){
+      $("#detailBody").children("tr").attr("style","font-family: Consolas");
+      $(obj).attr("style","font-family: Consolas; background-color: #b0d877");
+    }
+
+    function details(obj) {
+      if ($(obj).text() == '展开') {
+        var len = $(obj).parent().parent().children().length;
+        var detailLog = "";
+        var logs = resultData["testResult"][parseInt($(obj).attr("buttonIndex"))]["log"];
+        $(obj).text("收缩");
+        $(obj).removeClass("btn-primary");
+        $(obj).addClass("btn-danger");
+        $.each(logs, function (i, n) {
+          detailLog = detailLog + "<p>" + n + "</p>";
+        });
+        $(obj).parent().parent().after("<tr><td colspan='" + len + "'><div style='font-family: Consolas;font-size:12px;overflow-x:auto;'>" + detailLog + "</div></td></tr>");
+      } else if ($(obj).text() == '收缩') {
+        $(obj).parent().parent().next().remove();
+        $(obj).text("展开");
+        $(obj).removeClass("btn-danger");
+        $(obj).addClass("btn-primary");
+      }
+
+    }
+    //$(replaceFunc);
+
+    function replaceFunc () {
+      $(".eva-result").css('display',"block");
+      $(".eva-in").css('display',"none");
+      console.log(validateResult.categoryResult[1]);
+      $("#apiName").text(validateResult['name']);
+      $("#category").text(validateResult['category']);
+      $("#openapiVersion").text(validateResult['openapiVersion']);
+      $("#pathNum").text(validateResult['pathNum']);
+      $("#endpointNum").text(validateResult['endpointNum']);
+      $("#avgEndpoint").text(validateResult['endpointNum']/validateResult['pathNum']);
+      $("#avgHierarchies").text(validateResult['avgHierarchies']);
+      $("#securitySchema").text(validateResult['securityList']);
+
+      $("#categoryPathNum").text(validateResult.categoryResult[0]);
+      $("#categoryAvgEndpoint").text(validateResult.categoryResult[1]);
+      $("#categoryAvgHierarchies").text(validateResult.categoryResult[10]);
+
+      function generatePathDetail() {
+        $("#pathDetail").children().remove();
+        $.each(validateResult["path"], function (key, value) {
+          var path = '<div class="panel panel-default">'+
+            '<div class="panel-heading"><h5>'+key+'</h5></div>'+
+            '<div class="panel-body"><p></p></div>'+
+            '<table class="table table-hover">'+
+            '<thead>'+
+            '<tr>'+
+            '<th>#</th><th>Standard</th><th>Degree</th><th>realized</th><th>note</th>'+
+            '</tr>'+
+            '</thead>'+
+            '<tbody id="detailBody">'+
+            '<tr><th>1</th><th>no_</th><th>MUST</th><th>'+value["no_"]+'</th><th>Use "-" to split</th></tr>'+
+            '<tr><th>2</th><th>lowercase</th><th>MUST</th><th>'+value["lowercase"]+'</th><th></th></tr>'+
+            '<tr><th>3</th><th>noVersion</th><th>RECOMMENDED</th><th>'+value["noVersion"]+'</th><th>Recommended to identify the version information in Header</th></tr>'+
+            '<tr><th>4</th><th>noAPI</th><th>MUST</th><th>'+value["noapi"]+'</th><th></th></tr>'+
+            '<tr><th>5</th><th>noCRUD</th><th>SHOULD</th><th>'+value["noCRUD"]+'</th><th>'+value["CRUDlist"]+'</th></tr>'+
+            '<tr><th>6</th><th>noSuffix</th><th>MUST</th><th>'+value["noSuffix"]+'</th><th>'+value["suffixList"]+'</th></tr>'+
+            '<tr><th>7</th><th>noEnd/</th><th>MUST</th><th>'+value["noend/"]+'</th><th></th></tr>'+
+            '</tbody>'+
+            '</table>'+
+            '</div>';
+          $("#pathDetail").append(path);
+
+
+
+        });
+      }
+      generatePathDetail();
+
+
+      //$(".chosen-select").trigger("chosen:updated");
+
+      function pie() {
+        var option = {
+          title: {
+            text: 'HTTP Method Usage',
+            subtext: '',
+            x: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['GET', 'POST', 'DELETE','PUT','HEAD','PATCH','OPTIONS','TRACE']
+          },
+          series: [
+            {
+              name: 'Usage ratio',
+              type: 'pie',
+              radius: '50%',
+              center: ['50%', '50%'],
+              label: {
+                position: 'inner'
+              },
+              data: [
+                {value: validateResult['opGET'], name: 'GET'},
+                {value: validateResult['opPOST'], name: 'POST'},
+                {value: validateResult['opDELETE'], name: 'DELETE'},
+                {value: validateResult['opPUT'], name: 'PUT'},
+                {value: validateResult['opHEAD'], name: 'HEAD'},
+                {value: validateResult['opPATCH'], name: 'PATCH'},
+                {value: validateResult['opOPTIONS'], name: 'OPTIONS'},
+                {value: validateResult['opTRACE'], name: 'TRACE'},
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            },
+            {
+              name: 'Category Usage ratio',
+              tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : ({d}%)"
+              },
+              type: 'pie',
+              radius: ['60%','80%'],
+              center: ['50%', '50%'],
+              data: [
+                {value: validateResult.categoryResult[2], name: 'GET'},
+                {value: validateResult.categoryResult[3], name: 'POST'},
+                {value: validateResult.categoryResult[4], name: 'DELETE'},
+                {value: validateResult.categoryResult[5], name: 'PUT'},
+                {value: validateResult.categoryResult[6], name: 'HEAD'},
+                {value: validateResult.categoryResult[7], name: 'PATCH'},
+                {value: validateResult.categoryResult[8], name: 'OPTIONS'},
+                {value: validateResult.categoryResult[9], name: 'TRACE'},
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        };
+        var chart = echarts.init(document.getElementById("echarts-pie-chart"));
+        chart.setOption(option);
+      }
+
+      pie();
+      function bar() {
+        console.log("validateResult.pathEvaData[0]");
+        console.log(validateResult.pathEvaData[0]);
+        var option = {
+          title: {
+            text: 'Standard Realization Rate',
+            subtext: '',
+            x: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['Standard Realization Rate']
+          },
+          xAxis:{
+            axisLabel: {					//---坐标轴 标签
+              show: true,					//---是否显示
+              interval: 0,                //---强制显示所有标签
+              inside: false,				//---是否朝内
+              rotate: 0,					//---旋转角度
+              margin: 5,					//---刻度标签与轴线之间的距离
+              //color:'red',				//---默认取轴线的颜色
+            },
+            data:["no_","lowercase","noVersion","noAPI","noCRUD","noSuffix","noEnd/"]
+          },
+          yAxis:{
+            name:'Rate',				//---轴名称
+            type:'value',			//---轴类型，默认'category'
+            axisLabel: {
+              show: true,
+              interval: 'auto',
+              formatter: '{value} %'
+            },
+          },
+          series: [
+            {
+              name: 'Rate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                barBorderRadius: [25, 25, 0, 0],
+                color: function(params) {
+                  // build a color map as your need.
+                  var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                  return colorList[params.dataIndex]
+                }
+
+              },
+              barWidth:'40%',
+              z:10,
+              data: [validateResult.pathEvaData[0]/validateResult['pathNum']*100,validateResult.pathEvaData[1]/validateResult['pathNum']*100,
+                validateResult.pathEvaData[2]/validateResult['pathNum']*100,validateResult.pathEvaData[3]/validateResult['pathNum']*100,
+                validateResult.pathEvaData[4]/validateResult['pathNum']*100,validateResult.pathEvaData[5]/validateResult['pathNum']*100,
+                validateResult.pathEvaData[6]/validateResult['pathNum']*100]
+
+            },
+            {
+              name: 'catrgoryAvgRate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                barBorderRadius: [25, 25, 0, 0],
+                color: '#cdcdcd'
+
+              },
+              barGap:'-100%',
+              barWidth:'80%',
+              data: [validateResult.categoryResult[13]*100,validateResult.categoryResult[14]*100,validateResult.categoryResult[15]*100,
+                validateResult.categoryResult[16]*100,validateResult.categoryResult[17]*100,validateResult.categoryResult[18]*100,
+                validateResult.categoryResult[19]*100]
+
+            }
+          ]
+        };
+        var chart = echarts.init(document.getElementById("echarts-bar-chart"));
+        chart.setOption(option);
+      }
+      bar();
+    }
+    function exportReportTemplet() {
+      var element = $("#report");    // 这个dom元素是要导出pdf的div容器
+      var w = element.width();    // 获得该容器的宽
+      var h = element.height();    // 获得该容器的高
+      var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
+      var offsetLeft = element.offset().left;    // 获得该容器到文档最左的距离
+      var canvas = document.createElement("canvas");
+      canvas.width = w * 2;    // 将画布宽&&高放大两倍
+      canvas.height = h * 2;
+      var context = canvas.getContext("2d");
+      var scale = 2;
+      context.scale(2, 2);
+      //  context.translate(-offsetLeft - abs, -offsetTop);
+
+      var opts = {
+        scale: scale,
+        canvas: canvas,
+        width: w,
+        height: h,
+        useCORS: true,
+        background: '#FFF'
+      }
+
+      html2canvas(element, opts).then(function (canvas) {
+        allowTaint: false;
+        taintTest: false;
+        var contentWidth = canvas.width;
+        var contentHeight = canvas.height;
+        //一页pdf显示html页面生成的canvas高度;
+        var pageHeight = contentWidth / 592.28 * 841.89;
+        //未生成pdf的html页面高度
+        var leftHeight = contentHeight;
+        //页面偏移
+        var position = 0;
+        //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+        var imgWidth = 595.28;
+        var imgHeight = 592.28 / contentWidth * contentHeight;
+
+        var pageData = canvas.toDataURL('image/jpeg', 1.0);
+        //   var oCanvas = document.getElementById("print");
+        // Canvas2Image.saveAsJPEG(oCanvas);
+        var pdf = new jsPDF('', 'pt', 'a4');
+
+        //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+        //当内容未超过pdf一页显示的范围，无需分页
+        if (leftHeight < pageHeight) {
+          pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+        } else {    // 分页
+          while (leftHeight > 0) {
+            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+            leftHeight -= pageHeight;
+            position -= 841.89;
+            //避免添加空白页
+            if (leftHeight > 0) {
+              pdf.addPage();
+            }
+          }
+        }
+        pdf.save('evaluate result.pdf');
+      })
+
+    }
+  </script>
+</html>
