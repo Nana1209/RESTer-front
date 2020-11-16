@@ -9,7 +9,9 @@
         <p><router-link class="btn btn-primary" type="button" to="/oas-input" >Evaluate NOW!</router-link></p>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view>
+
+    </router-view>
     <div class="container" >
       <div id="standard">
         <div class="page-header text-center">

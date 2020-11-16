@@ -25,9 +25,11 @@ export default {
   methods:{
     srollTo:function (id){
       document.getElementById(id).scrollIntoView();
+      //document.querySelector(id).scrollIntoView({ behavior: "smooth" });
     }
   }
 }
+
 </script>
 
 <style>
