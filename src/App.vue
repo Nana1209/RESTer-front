@@ -6,8 +6,6 @@
           <router-link to="/"><p class="navbar-brand"> RESTer</p></router-link>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>-->
           <li><router-link to="/"><p class="navbar-text navbar-right" @click="srollTo('standard')"><i class="fa fa-list-ul"></i> Standard</p> </router-link></li>
           <li><router-link to="/"><p class="navbar-text navbar-right" @click="srollTo('status')"> <i class="fa fa-line-chart"></i> Status</p></router-link></li>
           <li><router-link to="/oas-input"><p class="navbar-text navbar-right"><i class="fa fa-pencil-square-o"></i> Evaluate</p></router-link></li>

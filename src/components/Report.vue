@@ -129,7 +129,121 @@
         </div>
       </div>
     </div>
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="ibox float-e-margins" style="margin-bottom: 0px">
+            <div class="ibox-title">
+              <h2>HTTP message</h2>
+              <div class="ibox-tools">
 
+                <a data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-list-ul"></i>
+                </a>
+                <a class="collapse-link" onclick="mycollapse(this)">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div style="height:300px" id="headerTable">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Header</th><th>Realized</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th>Accept</th><th></th>
+                      </tr>
+                      <tr>
+                        <th>Authorization</th><th></th>
+                      </tr>
+                      <tr>
+                        <th>Key</th><th></th>
+                      </tr>
+                      <tr>
+                        <th>Token</th><th></th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div style="height:300px" id="bodyTable">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Body</th><th>Realized</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th>HATEOAS</th><th></th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="ibox float-e-margins" style="margin-bottom: 0px">
+            <div class="ibox-title">
+              <h2>Nonfunctional design</h2>
+              <div class="ibox-tools">
+
+                <a data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-list-ul"></i>
+                </a>
+                <a class="collapse-link" onclick="mycollapse(this)">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="height:300px" id="cacheTable">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Cache</th>
+                      </tr>
+                      <tr>
+                        <th>Strong cache</th><th>Realized</th><th>Negotiation cache</th><th>Realized</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th>Cache-Control</th><th></th><th>Etag</th><th></th>
+                      </tr>
+                      <tr>
+                        <th>Expires</th><th></th><th>Last-Modified</th><th></th>
+                      </tr>
+                      <tr>
+                        <th>Date</th><th></th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">

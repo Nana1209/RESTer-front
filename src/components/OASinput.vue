@@ -137,12 +137,17 @@
         </div>
       </div>
     </div>
+<!--    <div>{{data}}</div>-->
   </div>
+
 </template>
 
 <script>
+import store from '../store/store'
+// this.store.setMessageAction('nice');
 export default {
-  name: "OASinput"
+  name: "OASinput",
+  // data:this.$store.states
 }
 </script>
 
