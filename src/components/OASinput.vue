@@ -130,24 +130,50 @@
                   </select>
                 </div>
               </div>
-              <router-link to="/report"><input class="btn btn-primary" type="button" onclick="submitFileForm()" value="EVALUATE"/></router-link>
+              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
         </div>
       </div>
     </div>
-<!--    <div>{{data}}</div>-->
   </div>
 
 </template>
 
 <script>
-import store from '../store/store'
+// import store from '../store/store'
 // this.store.setMessageAction('nice');
+import axios from 'axios'
 export default {
   name: "OASinput",
   // data:this.$store.states
+  data(){
+    return{
+      validateResult:{}
+    }
+  },
+  methods: {
+    submitFileForm() {
+      var formdata = new FormData(document.getElementById("fileupload"));
+      axios
+      .post('http://localhost:8080/restapi',
+        formdata)
+      .then(response => {
+        this.validateResult = response.data;
+        console.log("validateResult"+this.validateResult);
+        this.$store.commit('setDemoValue',response.data);
+          console.log("states"+this.$store.state.validateResult);
+      }
+      )
+      .catch(
+        function (error) { // 请求失败处理
+          console.log(error);
+        }
+      );
+      console.log("submit over");
+    },
+  }
 }
 </script>
 

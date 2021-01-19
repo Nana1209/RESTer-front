@@ -65,7 +65,7 @@
 
 <script>
 import echarts from 'echarts'
-import axios from 'axios';
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   data () {

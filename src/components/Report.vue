@@ -1,6 +1,6 @@
 <template>
   <div id="report">
-    <div class="row dashboard-header eva-result" style="display:none; margin-left: 20px;margin-right: 20px;background-color: #52806f">
+    <div class="row dashboard-header eva-result" style=" margin-left: 20px;margin-right: 20px;background-color: #52806f">
       <div class="col-sm-12 text-center">
         <span style="color: #ffffff; font-size: 30px; font-weight: 700">Evaluation Result</span>
         <a><span class="pull-right" style="color:#e7e7e7; font-size:15px;padding: 10px 0" @click="exportReportTemplet()" ><i class="fa fa-download"></i> PDF</span></a>
@@ -8,7 +8,7 @@
     </div>
 
 
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
@@ -31,58 +31,58 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-primary">name</label>
                       <div class="col-sm-5">
-                        <span class="form-control" id="apiName"></span>
+                        <span class="form-control" id="apiName">{{validateResult['name']}}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-primary">category</label>
                       <div class="col-sm-5">
-                        <span class="form-control" id="category"></span>
+                        <span class="form-control" id="category">{{ validateResult['category'] }}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-primary">OpenAPI Version</label>
                       <div class="col-sm-5">
-                        <span class="form-control" id="openapiVersion"></span>
+                        <span class="form-control" id="openapiVersion">{{ validateResult['openapiVersion'] }}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-danger">Total Paths</label>
                       <div class="col-sm-5">
-                        <span class="form-control text-danger" id="pathNum"></span>
+                        <span class="form-control text-danger" id="pathNum">{{ validateResult['pathNum'] }}</span>
                       </div>
                       <div class="col-sm-5">
-                        <span class="form-control text-danger" id="categoryPathNum"></span>
+                        <span class="form-control text-danger" id="categoryPathNum">{{validateResult.categoryResult[0]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-warning">Total Endpoints</label>
                       <div class="col-sm-5">
-                        <span class="form-control text-warning" id="endpointNum"></span>
+                        <span class="form-control text-warning" id="endpointNum">{{ validateResult['endpointNum'] }}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-info">AVG Endpoint</label>
                       <div class="col-sm-5">
-                        <span class="form-control text-info" id="avgEndpoint"></span>
+                        <span class="form-control text-info" id="avgEndpoint">{{validateResult['endpointNum']/validateResult['pathNum']}}</span>
                       </div>
                       <div class="col-sm-5">
-                        <span class="form-control text-info" id="categoryAvgEndpoint"></span>
+                        <span class="form-control text-info" id="categoryAvgEndpoint">{{validateResult.categoryResult[1]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-navy">AVG Hierarchies</label>
                       <div class="col-sm-5">
-                        <span class="form-control text-navy" id="avgHierarchies"></span>
+                        <span class="form-control text-navy" id="avgHierarchies">{{validateResult['avgHierarchies']}}</span>
                       </div>
                       <div class="col-sm-5">
-                        <span class="form-control text-navy" id="categoryAvgHierarchies"></span>
+                        <span class="form-control text-navy" id="categoryAvgHierarchies">{{validateResult.categoryResult[10]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-primary">Security Schema</label>
                       <div class="col-sm-5">
-                        <span class="form-control" id="securitySchema"></span>
+                        <span class="form-control" id="securitySchema">{{validateResult['securityList']}}</span>
                       </div>
                     </div>
                   </form>
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
@@ -129,7 +129,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
@@ -194,7 +194,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
@@ -244,7 +244,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins">
@@ -296,9 +296,14 @@
 </template>
 
 <script>
-
+import echarts from 'echarts'
 export default {
   name: "report",
+  data(){
+    return{
+      validateResult:this.$store.state.validateResult
+    }
+  },
   methods:{
 
      exportReportTemplet:function() {
