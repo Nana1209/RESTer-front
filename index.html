@@ -16,12 +16,14 @@
     <!-- built files will be auto injected -->
   </body>
   <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.js"></script>
   <script src="https://cdn.bootcss.com/chosen/1.8.2/chosen.jquery.js"></script>
   <script src="static/bootstrap-3.3.5-min.js"></script>
   <script src="static/canvas2image.js"></script>
   <script src="static/html2canvas.js"></script>
   <script src="static/jspdf.debug.js"></script>
+  <!--<script src="./node_modules/echarts-wordcloud/dist/echarts-wordcloud.min.js"></script>-->
+  <script src="static/echarts-wordcloud.js"></script>
   <script type="text/javascript">
 
   </script>
@@ -481,6 +483,132 @@
         chart.setOption(option);
       }
       bar();
+
+      function barStatus() {
+        console.log(validateResult.statusUsage[0]);
+        var option = {
+          title: {
+            text: 'Statistics of HTTP response status code usage',
+            subtext: '',
+            x: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['Proportion of Status Codes(%)']
+          },
+          xAxis:{
+            name:'Status',
+            axisLabel: {					//---坐标轴 标签
+              show: true,					//---是否显示
+              interval: 0,                //---强制显示所有标签
+              inside: false,				//---是否朝内
+              rotate: 0,					//---旋转角度
+              margin: 5,					//---刻度标签与轴线之间的距离
+              //color:'red',				//---默认取轴线的颜色
+            },
+            data:["2XX","3XX","4XX","5XX"]
+          },
+          yAxis:{
+            name:'Rate',				//---轴名称
+            type:'value',			//---轴类型，默认'category'
+            axisLabel: {
+              show: true,
+              interval: 'auto',
+              formatter: '{value} %'
+            },
+          },
+          series: [
+            {
+              name: 'Rate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                color: function(params) {
+                  // build a color map as your need.
+                  var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                  return colorList[params.dataIndex]
+                }
+
+              },
+              barWidth:'40%',
+              z:10,
+              data: [validateResult.statusUsage[1]/validateResult.statusUsage[0]*100,
+                validateResult.statusUsage[2]/validateResult.statusUsage[0]*100,
+                validateResult.statusUsage[3]/validateResult.statusUsage[0]*100,
+                validateResult.statusUsage[4]/validateResult.statusUsage[0]*100]
+
+            }/*,
+            {
+              name: 'catrgoryAvgRate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                barBorderRadius: [25, 25, 0, 0],
+                color: '#cdcdcd'
+
+              },
+              barGap:'-100%',
+              barWidth:'80%',
+              data: [validateResult.categoryResult[13]*100,validateResult.categoryResult[14]*100,validateResult.categoryResult[15]*100,
+                validateResult.categoryResult[16]*100,validateResult.categoryResult[17]*100,validateResult.categoryResult[18]*100,
+                validateResult.categoryResult[19]*100]
+
+            }*/
+          ]
+        };
+        var chart = echarts.init(document.getElementById("echarts-statusUsage-bar"));
+        chart.setOption(option);
+      }
+      barStatus();
+      function wordCloud() {
+        var status;
+        var datas=[];
+        for(status in validateResult.status){
+          var data={};
+          data['name']=status;
+          data['value']=validateResult.status[status];
+          datas.push(data);
+        }
+
+        var chart = echarts.init(document.getElementById('echarts-status-wordcloud'));
+        var option = {
+          title: {
+            // text: '企业一专利热词'
+          },
+          tooltip: {},
+          series: [{
+            type: 'wordCloud',
+            gridSize: 2,
+            sizeRange: [12, 50],
+            // rotationRange: [-90, 90],
+            rotationRange: [-50, 50],
+            shape: 'triangle',
+            // width: 100,
+            // height: 400,
+            textStyle: {
+              normal: {
+                color: function () {
+                  return 'rgb(' + [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160)
+                  ].join(',') + ')';
+                }
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: '#333'
+              }
+            },
+            data: datas
+          }]
+        };
+        chart.setOption(option);
+      }
+      wordCloud();
     }
 
   </script>

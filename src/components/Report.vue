@@ -13,7 +13,7 @@
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
             <div class="ibox-title">
-              <h2>Overall Result</h2>
+              <h2>Resource Design</h2>
               <div class="ibox-tools">
 
                 <a data-toggle="modal" data-target="#myModal">
@@ -88,7 +88,6 @@
                   </form>
                 </div>
                 <div class="col-sm-6">
-                  <div style="height:300px" id="echarts-pie-chart"></div>
                   <div style="height:300px" id="echarts-bar-chart"></div>
                 </div>
               </div>
@@ -97,6 +96,40 @@
         </div>
       </div>
     </div>
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="ibox float-e-margins" style="margin-bottom: 0px">
+            <div class="ibox-title">
+              <h2>HTTP Interaction</h2>
+              <div class="ibox-tools">
+
+                <a data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-list-ul"></i>
+                </a>
+                <a class="collapse-link" onclick="mycollapse(this)">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div style="height:300px" id="echarts-pie-chart"></div>
+                </div>
+                <div class="col-sm-4">
+                  <div style="height:300px" id="echarts-status-wordcloud"></div>
+                </div>
+                <div class="col-sm-4">
+                  <div style="height:300px" id="echarts-statusUsage-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper wrapper-content animated fadeInRight eva-result" style="display:none; padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
