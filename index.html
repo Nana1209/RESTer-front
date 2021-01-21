@@ -42,9 +42,9 @@
     var validateResult={};
     //文件上传Ajax
     //$("#jquery_post").on("click",function(){
-    function  submitFileForm(){
-      /*var inputf=new FormData;
-      inputf.append("testfile",document.getElementById("file_upload").files[0]);*/
+    /*function  submitFileForm(){
+      /!*var inputf=new FormData;
+      inputf.append("testfile",document.getElementById("file_upload").files[0]);*!/
       var formdata=new FormData(document.getElementById("fileupload"));
       $.ajax({
         url:'http://localhost:8080/restapi',
@@ -52,7 +52,7 @@
         dataType:"JSON",
         //data:inputf,
         data:formdata,
-        /*不加Ajax自动转换成字符串*/
+        /!*不加Ajax自动转换成字符串*!/
         contentType: false,
         processData: false,
         success:function (data) {
@@ -63,7 +63,7 @@
           replaceFunc();
         }
       })
-    }
+    }*/
 
     function urlSubmitForm() {
 
@@ -85,7 +85,7 @@
         }
       });
     }
-    function textSubmitForm() {
+    /*function textSubmitForm() {
 
       $.ajax({
 
@@ -104,7 +104,7 @@
           alert(JSON.stringify(data));
         }
       });
-    }
+    }*/
     function clickRow(obj){
       $("#detailBody").children("tr").attr("style","font-family: Consolas");
       $(obj).attr("style","font-family: Consolas; background-color: #b0d877");

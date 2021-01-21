@@ -6,24 +6,20 @@ import router from './router'
 import echarts from 'echarts'
 import store from "./store/index"
 Vue.config.productionTip = false
-/*import Vuex from 'vuex'
 
-Vue.use(Vuex)
+//Font Awesome配置
+import fontawesome from '@fortawesome/fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import solid from '@fortawesome/fontawesome-free-solid'
+import regular from '@fortawesome/fontawesome-free-regular'
+import brands from '@fortawesome/fontawesome-free-brands'
 
-const store = new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment (state) {
-      state.count++
-    }
-  }
-})*/
+fontawesome.library.add(solid)
+fontawesome.library.add(regular)
+fontawesome.library.add(brands)
 
-// Vue.prototype.$store = store
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

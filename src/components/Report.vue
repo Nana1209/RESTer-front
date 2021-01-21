@@ -7,13 +7,12 @@
       </div>
     </div>
 
-
     <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox float-e-margins" style="margin-bottom: 0px">
             <div class="ibox-title">
-              <h2>Resource Design</h2>
+              <h2>Information</h2>
               <div class="ibox-tools">
 
                 <a data-toggle="modal" data-target="#myModal">
@@ -26,7 +25,7 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-                <div class="col-sm-6 b-r" style="height:350px">
+                <div class="col-sm-12 " style="height:350px">
                   <form class="form-horizontal">
                     <div class="form-group">
                       <label class="col-sm-2 control-label text-primary">name</label>
@@ -46,49 +45,93 @@
                         <span class="form-control" id="openapiVersion">{{ validateResult['openapiVersion'] }}</span>
                       </div>
                     </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="ibox float-e-margins" style="margin-bottom: 0px">
+            <div class="ibox-title">
+              <h2>Resource Design</h2>
+              <div class="ibox-tools">
+
+                <a data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-list-ul"></i>
+                </a>
+                <a class="collapse-link" onclick="mycollapse(this)">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-sm-6 b-r" style="height:500px">
+                  <form class="form-horizontal">
+
+
+
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-danger">Total Paths</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-danger">Total Paths</label>
+                      <div class="col-sm-4">
                         <span class="form-control text-danger" id="pathNum">{{ validateResult['pathNum'] }}</span>
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-sm-4">
                         <span class="form-control text-danger" id="categoryPathNum">{{validateResult.categoryResult[0]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-warning">Total Endpoints</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-warning">Total Endpoints</label>
+                      <div class="col-sm-4">
                         <span class="form-control text-warning" id="endpointNum">{{ validateResult['endpointNum'] }}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-info">AVG Endpoint</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-info">AVG Endpoint</label>
+                      <div class="col-sm-4">
                         <span class="form-control text-info" id="avgEndpoint">{{validateResult['endpointNum']/validateResult['pathNum']}}</span>
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-sm-4">
                         <span class="form-control text-info" id="categoryAvgEndpoint">{{validateResult.categoryResult[1]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-navy">AVG Hierarchies</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-navy">AVG Hierarchies</label>
+                      <div class="col-sm-4">
                         <span class="form-control text-navy" id="avgHierarchies">{{validateResult['avgHierarchies']}}</span>
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-sm-4">
                         <span class="form-control text-navy" id="categoryAvgHierarchies">{{validateResult.categoryResult[10]}}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-primary">Security Schema</label>
-                      <div class="col-sm-5">
-                        <span class="form-control" id="securitySchema">{{validateResult['securityList']}}</span>
+                      <label class="col-sm-3 control-label text-navy">Has "api" in Host</label>
+                      <div class="col-sm-4">
+                        <span class="form-control text-navy" >{{validateResult['apiInServer']}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label text-navy">Contextualized Path</label>
+                      <div class="col-sm-4">
+                        <span class="form-control text-navy" >{{validateResult['contextualizedPath']}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label text-navy">Has Functional Query Parameters</label>
+                      <div class="col-sm-4">
+                        <span class="form-control text-navy" >{{validateResult['hasPagePara']}}</span>
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="col-sm-6">
-                  <div style="height:300px" id="echarts-bar-chart"></div>
+                  <div style="height:500px" id="echarts-bar-chart"></div>
                 </div>
               </div>
             </div>
@@ -114,14 +157,14 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-                <div class="col-sm-4">
-                  <div style="height:300px" id="echarts-pie-chart"></div>
+                <div class="col-sm-4 b-r">
+                  <div style="height:400px" id="echarts-pie-chart"></div>
+                </div>
+                <div class="col-sm-4 b-r">
+                  <div style="height:400px" id="echarts-status-wordcloud"></div>
                 </div>
                 <div class="col-sm-4">
-                  <div style="height:300px" id="echarts-status-wordcloud"></div>
-                </div>
-                <div class="col-sm-4">
-                  <div style="height:300px" id="echarts-statusUsage-bar"></div>
+                  <div style="height:400px" id="echarts-statusUsage-bar"></div>
                 </div>
               </div>
             </div>
@@ -147,7 +190,7 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 b-r">
                   <div style="height:300px" id="headerTable">
                     <table class="table table-hover">
                       <thead>
@@ -157,16 +200,16 @@
                       </thead>
                       <tbody>
                       <tr>
-                        <th>Accept</th><th></th>
+                        <th>Accept</th><th><i v-bind:class="validateResult['hasAccept']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Authorization</th><th></th>
+                        <th>Authorization</th><th><i v-bind:class="validateResult['hasAuthorization']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Key</th><th></th>
+                        <th>Key</th><th><i v-bind:class="validateResult['hasKey']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Token</th><th></th>
+                        <th>Token</th><th><i v-bind:class="validateResult['hasToken']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       </tbody>
                     </table>
@@ -182,7 +225,7 @@
                       </thead>
                       <tbody>
                       <tr>
-                        <th>HATEOAS</th><th></th>
+                        <th>HATEOAS</th><th><i v-bind:class="validateResult['hateoas']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       </tbody>
                     </table>
@@ -212,6 +255,49 @@
             </div>
             <div class="ibox-content">
               <div class="row">
+                <div class="col-sm-6 b-r">
+                  <div style="height:160px" id="versionTable">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Version</th>
+                      </tr>
+
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>location</th>
+                          <th>{{validateResult['versionInPath']?'Path ':''}}{{validateResult['versionInHeader']?'Header ':''}}{{validateResult['versionInQueryPara']?'Query Parameter ':''}}{{validateResult['versionInHost']?'Host':''}}</th>
+                        </tr>
+                        <tr>
+                          <th>
+                            Semantic Version
+                          </th><th><i v-bind:class="validateResult['semanticVersion']?'fas fa-check':'fas fa-times'"/></th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div style="height:160px" id="securityTable">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Security</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>Schema</th><th>{{validateResult['securityList']}}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="row">
                 <div class="col-sm-12">
                   <div style="height:300px" id="cacheTable">
                     <table class="table table-hover">
@@ -225,13 +311,13 @@
                       </thead>
                       <tbody>
                       <tr>
-                        <th>Cache-Control</th><th></th><th>Etag</th><th></th>
+                        <th>Cache-Control</th><th><i v-bind:class="validateResult['hasCacheControl']?'fas fa-check':'fas fa-times'"/></th><th>Etag</th><th><i v-bind:class="validateResult['hasEtag']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Expires</th><th></th><th>Last-Modified</th><th></th>
+                        <th>Expires</th><th><i v-bind:class="validateResult['hasExpires']?'fas fa-check':'fas fa-times'"/></th><th>Last-Modified</th><th><i v-bind:class="validateResult['hasLastModified']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Date</th><th></th>
+                        <th>Date</th><th><i v-bind:class="validateResult['hasDate']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       </tbody>
                     </table>
@@ -297,11 +383,18 @@
 
 <script>
 import echarts from 'echarts'
+import 'echarts-wordcloud'
 export default {
   name: "report",
   data(){
     return{
-      validateResult:this.$store.state.validateResult
+      validateResult:this.$store.state.validateResult,
+      datas:[],
+      wordCloudCharts:null,
+      statusCharts:null,
+      barCharts:null,
+      httpPieCharts:null,
+      icon:['fas','check']
     }
   },
   methods:{
@@ -368,7 +461,316 @@ export default {
         })
 
       },
+     wordCloud(){
+       var status;
+       for(status in this.validateResult.status){
+         var data={};
+         data['name']=status;
+         data['value']=this.validateResult.status[status];
+         this.datas.push(data);
+       }
+       this.wordCloudCharts=echarts.init(document.getElementById('echarts-status-wordcloud'));
+       this.wordCloudCharts.setOption({
+         title: {
+           text: 'Frequency of Status Code'
+         },
+         tooltip: {},
+         series: [{
+           type: 'wordCloud',
+           gridSize: 2,
+           sizeRange: [12, 50],
+           // rotationRange: [-90, 90],
+           rotationRange: [-50, 50],
+           shape: 'triangle',
+           // width: 100,
+           // height: 400,
+           textStyle: {
+             normal: {
+               color: function () {
+                 return 'rgb(' + [
+                   Math.round(Math.random() * 160),
+                   Math.round(Math.random() * 160),
+                   Math.round(Math.random() * 160)
+                 ].join(',') + ')';
+               }
+             },
+             emphasis: {
+               shadowBlur: 10,
+               shadowColor: '#333'
+             }
+           },
+           data: this.datas
+         }]
+       })
+     },
+     barStatus(){
+       this.statusCharts=echarts.init(document.getElementById("echarts-statusUsage-bar"));
+       this.statusCharts.setOption({
+         title: {
+           text: 'Usage of Status Code',
+           subtext: '',
+           x: 'center'
+         },
+         tooltip: {
+           trigger: 'item',
+           formatter: "{a} <br/>{b} : {c}%"
+         },
+         legend: {
+           orient: 'vertical',
+           left: 'left',
+           data: ['Proportion of Status Codes(%)']
+         },
+         xAxis:{
+           name:'Status',
+           axisLabel: {					//---坐标轴 标签
+             show: true,					//---是否显示
+             interval: 0,                //---强制显示所有标签
+             inside: false,				//---是否朝内
+             rotate: 0,					//---旋转角度
+             margin: 5,					//---刻度标签与轴线之间的距离
+             //color:'red',				//---默认取轴线的颜色
+           },
+           data:["2XX","3XX","4XX","5XX"]
+         },
+         yAxis:{
+           name:'Rate',				//---轴名称
+           type:'value',			//---轴类型，默认'category'
+           axisLabel: {
+             show: true,
+             interval: 'auto',
+             formatter: '{value} %'
+           },
+         },
+         series: [
+           {
+             name: 'Rate',
+             type: 'bar',
+             itemStyle:{					//---图形形状
+               color: function(params) {
+                 // build a color map as your need.
+                 var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                 return colorList[params.dataIndex]
+               }
 
+             },
+             barWidth:'40%',
+             z:10,
+             data: [this.validateResult.statusUsage[1]/this.validateResult.statusUsage[0]*100,
+               this.validateResult.statusUsage[2]/this.validateResult.statusUsage[0]*100,
+               this.validateResult.statusUsage[3]/this.validateResult.statusUsage[0]*100,
+               this.validateResult.statusUsage[4]/this.validateResult.statusUsage[0]*100]
+
+           }/*,
+            {
+              name: 'catrgoryAvgRate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                barBorderRadius: [25, 25, 0, 0],
+                color: '#cdcdcd'
+
+              },
+              barGap:'-100%',
+              barWidth:'80%',
+              data: [validateResult.categoryResult[13]*100,validateResult.categoryResult[14]*100,validateResult.categoryResult[15]*100,
+                validateResult.categoryResult[16]*100,validateResult.categoryResult[17]*100,validateResult.categoryResult[18]*100,
+                validateResult.categoryResult[19]*100]
+
+            }*/
+         ]
+       });
+     },
+     rullBar(){
+       var option = {
+         title: {
+           text: 'Standard Realization Rate',
+           subtext: '',
+           x: 'center'
+         },
+         tooltip: {
+           trigger: 'item',
+           formatter: "{a} <br/>{b} : {c}%"
+         },
+         legend: {
+           orient: 'vertical',
+           left: 'left',
+           data: ['Standard Realization Rate']
+         },
+         xAxis:{
+           axisLabel: {					//---坐标轴 标签
+             show: true,					//---是否显示
+             interval: 0,                //---强制显示所有标签
+             inside: false,				//---是否朝内
+             rotate: 0,					//---旋转角度
+             margin: 5,					//---刻度标签与轴线之间的距离
+             //color:'red',				//---默认取轴线的颜色
+           },
+           data:["no_","lowercase","noVersion","noAPI","noCRUD","noSuffix","noEnd/"]
+         },
+         yAxis:{
+           name:'Rate',				//---轴名称
+           type:'value',			//---轴类型，默认'category'
+           axisLabel: {
+             show: true,
+             interval: 'auto',
+             formatter: '{value} %'
+           },
+         },
+         series: [
+           {
+             name: 'Rate',
+             type: 'bar',
+             itemStyle:{					//---图形形状
+               //barBorderRadius: [25, 25, 0, 0],
+               color: function(params) {
+                 // build a color map as your need.
+                 var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                 return colorList[params.dataIndex]
+               }
+
+             },
+             barWidth:'40%',
+             z:10,
+             data: [this.validateResult.pathEvaData[0]/this.validateResult['pathNum']*100,this.validateResult.pathEvaData[1]/this.validateResult['pathNum']*100,
+               this.validateResult.pathEvaData[2]/this.validateResult['pathNum']*100,this.validateResult.pathEvaData[3]/this.validateResult['pathNum']*100,
+               this.validateResult.pathEvaData[4]/this.validateResult['pathNum']*100,this.validateResult.pathEvaData[5]/this.validateResult['pathNum']*100,
+               this.validateResult.pathEvaData[6]/this.validateResult['pathNum']*100]
+
+           },
+           {
+             name: 'catrgoryAvgRate',
+             type: 'bar',
+             itemStyle:{					//---图形形状
+               //barBorderRadius: [25, 25, 0, 0],
+               color: '#cdcdcd'
+
+             },
+             barGap:'0%',
+             barWidth:'40%',
+             data: [this.validateResult.categoryResult[13]*100,this.validateResult.categoryResult[14]*100,this.validateResult.categoryResult[15]*100,
+               this.validateResult.categoryResult[16]*100,this.validateResult.categoryResult[17]*100,this.validateResult.categoryResult[18]*100,
+               this.validateResult.categoryResult[19]*100]
+
+           }
+         ]
+       };
+       this.barCharts=echarts.init(document.getElementById("echarts-bar-chart"));
+       this.barCharts.setOption(option);
+     },
+     httpPie(){
+       var option = {
+         title: {
+           text: 'HTTP Method Usage',
+           subtext: '',
+           x: 'center'
+         },
+         tooltip: {
+           trigger: 'item',
+           formatter: "{a} <br/>{b} : {c} ({d}%)"
+         },
+         legend: {
+           orient: 'vertical',
+           left: 'left',
+           data: ['GET', 'POST', 'DELETE','PUT','HEAD','PATCH','OPTIONS','TRACE']
+         },
+         series: [
+           {
+             name: 'Usage ratio',
+             type: 'pie',
+             radius: '50%',
+             center: ['50%', '50%'],
+             label: {
+               position: 'inner'
+             },
+             data: [
+               {value: this.validateResult['opGET'], name: 'GET'},
+               {value: this.validateResult['opPOST'], name: 'POST'},
+               {value: this.validateResult['opDELETE'], name: 'DELETE'},
+               {value: this.validateResult['opPUT'], name: 'PUT'},
+               {value: this.validateResult['opHEAD'], name: 'HEAD'},
+               {value: this.validateResult['opPATCH'], name: 'PATCH'},
+               {value: this.validateResult['opOPTIONS'], name: 'OPTIONS'},
+               {value: this.validateResult['opTRACE'], name: 'TRACE'},
+             ],
+             itemStyle: {
+               emphasis: {
+                 shadowBlur: 10,
+                 shadowOffsetX: 0,
+                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+               }
+             }
+           },
+           {
+             name: 'Category Usage ratio',
+             tooltip: {
+               trigger: 'item',
+               formatter: "{a} <br/>{b} : ({d}%)"
+             },
+             type: 'pie',
+             radius: ['60%','80%'],
+             center: ['50%', '50%'],
+             data: [
+               {value: this.validateResult.categoryResult[2], name: 'GET'},
+               {value: this.validateResult.categoryResult[3], name: 'POST'},
+               {value: this.validateResult.categoryResult[4], name: 'DELETE'},
+               {value: this.validateResult.categoryResult[5], name: 'PUT'},
+               {value: this.validateResult.categoryResult[6], name: 'HEAD'},
+               {value: this.validateResult.categoryResult[7], name: 'PATCH'},
+               {value: this.validateResult.categoryResult[8], name: 'OPTIONS'},
+               {value: this.validateResult.categoryResult[9], name: 'TRACE'},
+             ],
+             itemStyle: {
+               emphasis: {
+                 shadowBlur: 10,
+                 shadowOffsetX: 0,
+                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+               }
+             }
+           }
+         ]
+       };
+       this.httpPieCharts = echarts.init(document.getElementById("echarts-pie-chart"));
+       this.httpPieCharts.setOption(option);
+     },
+    generatePathDetail() {
+      $("#pathDetail").children().remove();
+      $.each(this.validateResult["path"], function (key, value) {
+        var path = '<div class="panel panel-default">'+
+          '<div class="panel-heading"><h5>'+key+'</h5></div>'+
+          '<div class="panel-body"><p></p></div>'+
+          '<table class="table table-hover">'+
+          '<thead>'+
+          '<tr>'+
+          '<th>#</th><th>Standard</th><th>Degree</th><th>realized</th><th>note</th>'+
+          '</tr>'+
+          '</thead>'+
+          '<tbody id="detailBody">'+
+          '<tr><th>1</th><th>no_</th><th>MUST</th><th>'+value["no_"]+'</th><th>Use "-" to split</th></tr>'+
+          '<tr><th>2</th><th>lowercase</th><th>MUST</th><th>'+value["lowercase"]+'</th><th></th></tr>'+
+          '<tr><th>3</th><th>noVersion</th><th>RECOMMENDED</th><th>'+value["noVersion"]+'</th><th>Recommended to identify the version information in Header</th></tr>'+
+          '<tr><th>4</th><th>noAPI</th><th>MUST</th><th>'+value["noapi"]+'</th><th></th></tr>'+
+          '<tr><th>5</th><th>noCRUD</th><th>SHOULD</th><th>'+value["noCRUD"]+'</th><th>'+value["CRUDlist"]+'</th></tr>'+
+          '<tr><th>6</th><th>noSuffix</th><th>MUST</th><th>'+value["noSuffix"]+'</th><th>'+value["suffixList"]+'</th></tr>'+
+          '<tr><th>7</th><th>noEnd/</th><th>MUST</th><th>'+value["noend/"]+'</th><th></th></tr>'+
+          '</tbody>'+
+          '</table>'+
+          '</div>';
+        $("#pathDetail").append(path);
+
+
+
+      });
+    }
+
+  },
+  mounted() {
+    this.$nextTick(function() {
+      console.log("in mounted")
+      this.generatePathDetail()
+      this.wordCloud()
+      this.barStatus()
+      this.rullBar()
+      this.httpPie()
+    })
   }
 }
 </script>
