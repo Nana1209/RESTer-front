@@ -52,7 +52,7 @@
                 </div>
               </div>
 
-              <router-link to="/report"><input class="btn btn-primary" type="button" @click="urlSubmitForm()" value="EVALUATE"/></router-link>
+              <input class="btn btn-primary" type="button" @click="urlSubmitForm()" value="EVALUATE"/>
               <input class="btn btn-default" type="reset" value="RESET"/>
 
             </form>
@@ -90,7 +90,8 @@
                 </div>
               </div>
 
-              <router-link to="/report"><input class="btn btn-primary" type="button" @click="textSubmitForm()" value="EVALUATE"/></router-link>
+<!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="textSubmitForm()" value="EVALUATE"/></router-link>-->
+              <input class="btn btn-primary" type="button" @click="textSubmitForm()" value="EVALUATE"/>
               <input class="btn btn-default" type="reset" value="RESET"/>
 
             </form>
@@ -130,7 +131,8 @@
                   </select>
                 </div>
               </div>
-              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>
+<!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
+              <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
@@ -164,6 +166,7 @@ export default {
         console.log("validateResult"+this.validateResult);*/
         this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
+          this.$router.push('/report')
       }
       )
       .catch(
@@ -179,6 +182,7 @@ export default {
       .then(response => {
         this.$store.commit('setDemoValue',response.data);
         console.log("states"+this.$store.state.validateResult);
+        this.$router.push('/report')
       })
         .catch(
           function (error) { // 请求失败处理
@@ -193,6 +197,7 @@ export default {
         .then(response => {
           this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
+          this.$router.push('/report')
         })
         .catch(
           function (error) { // 请求失败处理

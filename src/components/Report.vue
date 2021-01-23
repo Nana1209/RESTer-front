@@ -389,6 +389,7 @@ export default {
   data(){
     return{
       validateResult:this.$store.state.validateResult,
+      // validateResult:null,
       datas:[],
       wordCloudCharts:null,
       statusCharts:null,
@@ -765,6 +766,7 @@ export default {
   mounted() {
     this.$nextTick(function() {
       console.log("in mounted")
+      // data.validateResult=this.$store.state.validateResult
       this.generatePathDetail()
       this.wordCloud()
       this.barStatus()
