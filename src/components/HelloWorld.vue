@@ -443,7 +443,7 @@ export default {
           that.drawPie();
         })
         .catch(function (error) { // 请求失败处理
-          console.log(error);
+          console.log("cateAjaxerror"+error);
         });
 
 
