@@ -430,7 +430,7 @@ export default {
     cateResult(){
       var that=this
       axios
-        .get('http://localhost:8080/empirical-result', {
+        .get('http://localhost:9000/empirical-result', {
           params: {
             category:this.category
           }
