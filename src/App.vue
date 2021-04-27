@@ -7,8 +7,8 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><router-link to="/"><p class="navbar-text navbar-right" @click="srollTo('standard')"><i class="fa fa-list-ul"></i> Standard</p> </router-link></li>
-          <li><router-link to="/"><p class="navbar-text navbar-right" @click="srollTo('status')"> <i class="fa fa-line-chart"></i> Status</p></router-link></li>
-          <li><router-link to="/oas-input"><p class="navbar-text navbar-right"><i class="fa fa-pencil-square-o"></i> Evaluate</p></router-link></li>
+          <li><router-link to="/"><p class="navbar-text navbar-right" @click="srollTo('status')"> <i class="fa fa-chart-line"></i> Status</p></router-link></li>
+          <li><router-link to="/oas-input"><p class="navbar-text navbar-right"><i class="fas fa-edit"></i> Evaluate</p></router-link></li>
         </ul>
       </div>
     </nav><router-view/>
