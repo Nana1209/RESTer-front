@@ -159,7 +159,7 @@ export default {
     submitFileForm() {
       var formdata = new FormData(document.getElementById("fileupload"));
       axios
-      .post('http://localhost:8080/restapi',
+      .post('http://localhost:9000/restapi-file',
         formdata)
       .then(response => {
         /*this.validateResult = response.data;
@@ -177,8 +177,13 @@ export default {
       console.log("submit over");
     },
     textSubmitForm(){
-      axios
-      .post('http://localhost:8080/restapi',$('#textForm').serialize())
+      var formdata = new FormData(document.getElementById("textForm"));
+
+      axios.post('http://localhost:9000/restapi',formdata)
+        /*axios.post('http://localhost:8080/restapi',qs.stringify({
+          'category': this.category,
+          'context':this.context
+        }))*/
       .then(response => {
         this.$store.commit('setDemoValue',response.data);
         console.log("states"+this.$store.state.validateResult);
@@ -193,7 +198,7 @@ export default {
     },
     urlSubmitForm(){
       axios
-        .post('http://localhost:8080/restapi',$('#urlForm').serialize())
+        .post('http://localhost:9000/restapi-url',$('#urlForm').serialize())
         .then(response => {
           this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);

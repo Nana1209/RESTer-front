@@ -401,6 +401,7 @@ export default {
   methods:{
 
      exportReportTemplet:function() {
+       console.log("in pdrexport")
         var element = $("#report");    // 这个dom元素是要导出pdf的div容器
         var w = element.width();    // 获得该容器的宽
         var h = element.height();    // 获得该容器的高
@@ -442,7 +443,7 @@ export default {
           //   var oCanvas = document.getElementById("print");
           // Canvas2Image.saveAsJPEG(oCanvas);
           var pdf = new jsPDF('', 'pt', 'a4');
-
+          console.log("pdf middle")
           //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
           //当内容未超过pdf一页显示的范围，无需分页
           if (leftHeight < pageHeight) {
@@ -458,8 +459,63 @@ export default {
               }
             }
           }
+          console.log("before pdfsave")
           pdf.save('evaluate result.pdf');
         })
+
+         /*html2canvas(
+           document.getElementById("report"), {
+             dpi: 172, //导出pdf清晰度
+             onrendered: function(canvas) {
+               var contentWidth = canvas.width;
+               var contentHeight = canvas.height;
+
+               //一页pdf显示html页面生成的canvas高度;
+               var pageHeight = contentWidth / 592.28 * 841.89;
+               //未生成pdf的html页面高度
+               var leftHeight = contentHeight;
+               //pdf页面偏移
+               var position = 0;
+               //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+               var imgWidth = 595.28;
+               var imgHeight = 592.28 / contentWidth * contentHeight;
+
+               var pageData = canvas.toDataURL('image/jpeg', 1.0);
+               var pdf = new jsPDF('', 'pt', 'a4');
+
+               //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+               //当内容未超过pdf一页显示的范围，无需分页
+               if(leftHeight < pageHeight) {
+                 pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+               } else {
+                 while(leftHeight > 0) {
+                   pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                   leftHeight -= pageHeight;
+                   position -= 841.89;
+                   //避免添加空白页
+                   if(leftHeight > 0) {
+                     pdf.addPage();
+                   }
+                 }
+               }
+               pdf.save('content.pdf');
+             },
+             //背景设为白色（默认为黑色）
+             background: "#fff"
+           })*/
+       /*var pdf = new jsPDF('p','pt','a4');
+       // 设置打印比例 越大打印越小
+       pdf.internal.scaleFactor = 2;
+       var options = {
+         pagesplit: true, //设置是否自动分页
+         "background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
+       };
+       var printHtml = $('#report').get(0);   // 页面某一个div里面的内容，通过id获取div内容
+       console.log("printhtml"+printHtml)
+       pdf.addHTML(printHtml,15, 15, options,function() {
+         pdf.save('目标.pdf');
+       });*/
+
 
       },
      wordCloud(){
