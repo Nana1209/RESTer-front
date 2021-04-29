@@ -160,8 +160,8 @@ export default {
   data(){
     return{
       validateResult:{},
-      // resterIP:'http://39.104.105.27:8900',
-      resterIP:'http://localhost:8900',
+       resterIP:'http://39.104.105.27:8900',
+      //resterIP:'http://localhost:8900',
     }
   },
   methods: {
