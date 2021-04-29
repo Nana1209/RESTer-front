@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper wrapper-content animated fadeInRight eva-in " style="padding-top: 10px; padding-bottom: 0px">
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
+      <div class="col-md-6 col-md-offset-3">
         <h2>Please enter your API specification:</h2>
       </div>
     </div>
     <div class="row text-center ">
-      <div class="col-md-4 col-md-offset-4">
+      <div class="col-md-6 col-md-offset-3">
         <ul id="myTab" class="nav nav-tabs">
           <li><h3>choose a way</h3></li>
           <li class="active">
@@ -16,6 +16,7 @@
           </li>
           <li><a href="#url" data-toggle="tab">URL</a></li>
           <li><a href="#text" data-toggle="tab">TEXT</a></li>
+          <li><a href="#hengshengapi" data-toggle="tab">HENG SHENG</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
           <div class="tab-pane fade "  id="url">
@@ -132,6 +133,45 @@
                 </div>
               </div>
 <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
+              <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
+              <!--<p> <button id="jquery_post">jquery提交</button></p>-->
+            </form>
+          </div>
+          <div class="tab-pane fade in active"  id="hengshengapi">
+            <form id="hsapi">
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-md-2 col-md-offset-2 control-label text-navy">HENGSHENG API url</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="hsurl"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 col-md-offset-2 control-label text-navy">Category</label>
+                <div class="col-sm-6">
+                  <select class="form-control" name="category">
+                    <option selected="selected">Please select             </option>
+                    <option value="cloud">cloud (cloud, backend, IOT, iPAAS)</option>
+                    <option value="open_data">open_data (open_data, storage, database, data)</option>
+                    <option value="tools">tools (developer_tools, project_management, web site management, application development)</option>
+                    <option value="media">media</option>
+                    <option value="entertainment">entertainment (entertainment, sports)</option>
+                    <option value="ecommerce">ecommerce (ecommerce, marketing, payment, business)</option>
+                    <option value="financial">financial</option>
+                    <option value="location">location (location, transport, time_management)</option>
+                    <option value="text">text (text, transcription, documents, reporting)</option>
+                    <option value="social">social (social, customer_relation, customer relationship management)</option>
+                    <option value="collaboration">collaboration (collaboration, enterprise, jobs)</option>
+                    <option value="messaging">messaging (messaging, telecom, email, chat)</option>
+                    <option value="security">security (security, monitoring, verification, fitness)</option>
+                    <option value="search">search (search, education, genetics, government, food, medical, charity, reference, healthcare, 3d)</option>
+                    <option value="hosting">hosting (hosting, domains, accounts</option>
+                    <option value="analytics">analytics (analytics, machine_learning, extraction)</option>
+                  </select>
+                </div>
+              </div>
+              <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
               <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
