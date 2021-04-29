@@ -102,7 +102,13 @@
                 <div class="row">
                   <label class="col-sm-2 col-md-offset-2 control-label text-navy">API file</label>
                   <div class="col-md-6">
-                    <input id="file_upload" type="file" name="testfile">
+<!--                    <input id="file_upload" type="file" name="testfile">-->
+                    <input id="file_upload" type="file" name="testfile" style="display: none;" onchange="document.getElementById('path').value=this.value">
+                    <input type="text" class="form-control " name="path" id="path" readonly>
+                  </div>
+                  <div class="col-md-2">
+                    <input class="btn btn-primary" type="button" value="choose a file" onclick="document.getElementById('file_upload').click()">
+
                   </div>
                 </div>
 
@@ -146,6 +152,7 @@
 <script>
 // import store from '../store/store'
 // this.store.setMessageAction('nice');
+import ElementUI from 'element-ui'
 import axios from 'axios'
 export default {
   name: "OASinput",
