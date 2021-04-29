@@ -789,6 +789,7 @@ export default {
        this.httpPieCharts.setOption(option);
      },
     generatePathDetail() {
+       console.log(this.validateResult['name']);
       $("#pathDetail").children().remove();
       $.each(this.validateResult["path"], function (key, value) {
         var path = '<div class="panel panel-default">'+

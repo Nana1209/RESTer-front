@@ -152,15 +152,18 @@ export default {
   // data:this.$store.states
   data(){
     return{
-      validateResult:{}
+      validateResult:{},
+      // resterIP:'http://39.104.105.27:8900',
+      resterIP:'http://localhost:8900',
     }
   },
   methods: {
     submitFileForm() {
-      var formdata = new FormData(document.getElementById("fileupload"));
+      var formdatafile = new FormData(document.getElementById("fileupload"));
       axios
-      .post('http://localhost:9000/restapi-file',
-        formdata)
+      //.post('http://39.104.105.27:8900/restapi-file',
+      .post(this.resterIP+'/restapi-file',
+        formdatafile,{headers:{"Access-Control-Allow-Origin": "*"}})
       .then(response => {
         /*this.validateResult = response.data;
         console.log("validateResult"+this.validateResult);*/
@@ -178,8 +181,8 @@ export default {
     },
     textSubmitForm(){
       var formdata = new FormData(document.getElementById("textForm"));
-
-      axios.post('http://localhost:9000/restapi',formdata)
+      axios.post(this.resterIP+'/restapi-text',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
+      //axios.post('http://39.104.105.27:8900/restapi',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
         /*axios.post('http://localhost:8080/restapi',qs.stringify({
           'category': this.category,
           'context':this.context
@@ -197,8 +200,9 @@ export default {
       console.log("submit over");
     },
     urlSubmitForm(){
+      var formdata = new FormData(document.getElementById("urlForm"));
       axios
-        .post('http://localhost:9000/restapi-url',$('#urlForm').serialize())
+        .post(this.resterIP+'/restapi-url',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
         .then(response => {
           this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
