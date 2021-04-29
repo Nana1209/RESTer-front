@@ -26,7 +26,7 @@
       <div id="status">
         <div class="page-header text-center">
           <h2>REST API development status</h2>
-          <h3>REST APIs for our empirical srudy from APIs.guru(https://apis.guru/).</h3>
+          <h3>REST APIs for our empirical study from APIs.guru(https://apis.guru/).</h3>
           <form class="form-inline text-center" id="cateForm">
             <select class="form-control" name="category" v-model="category">
               <option selected="selected" value="allresult">Show all, please select one category.</option>
