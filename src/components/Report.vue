@@ -15,9 +15,9 @@
               <h2>Information</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -62,9 +62,9 @@
               <h2>Resource Design</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -147,9 +147,9 @@
               <h2>HTTP Interaction</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -180,9 +180,9 @@
               <h2>HTTP message</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -245,9 +245,9 @@
               <h2>Nonfunctional design</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -337,10 +337,10 @@
             <div class="ibox-title">
               <h2>Detailed result</h2>
               <div class="ibox-tools">
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
-                <a class="collapse-link">
+                </a>-->
+                <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
 
@@ -830,6 +830,21 @@ export default {
       this.rullBar()
       this.httpPie()
     })
+  },
+  created() {
+    console.log("in created")
+
+    //在页面加载时读取sessionStorage里的状态信息
+    if (sessionStorage.getItem('result')) {
+      this.$store.commit('setDemoValue',JSON.parse(sessionStorage.getItem('result')));
+      // this.$store.replaceState(Object.assign({}, this.$store.state.validateResult, JSON.parse(sessionStorage.getItem('result'))));
+    }
+    console.log("data[name]"+this.validateResult['name']);
+
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('result', JSON.stringify(this.$store.state.validateResult));
+    });
   }
 }
 </script>
