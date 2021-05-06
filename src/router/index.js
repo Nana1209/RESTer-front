@@ -7,8 +7,8 @@ import OASinput from "../components/OASinput";
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base:'/rester/',
+  // mode: 'history',
+  base:'/rester',
   routes: [
     {
       path: '/',
