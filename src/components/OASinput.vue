@@ -172,7 +172,7 @@
                 </div>
               </div>
               <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
-              <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
+              <input class="btn btn-primary" type="button" @click="submitHSAPI()" value="EVALUATE"/>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
@@ -238,6 +238,21 @@ export default {
           }
         );
       console.log("submit over");
+    },
+    submitHSAPI(){
+      var formdata = new FormData(document.getElementById("hsapi"));
+      axios.post(this.resterIP+'/restapi-hs',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
+        .then(response => {
+          this.$store.commit('setDemoValue',response.data);
+          console.log("states"+this.$store.state.validateResult);
+          this.$router.push('/report')
+        })
+        .catch(
+          function (error) { // 请求失败处理
+            console.log(error);
+          }
+        );
+      console.log("HSAPI submit over");
     },
     urlSubmitForm(){
       var formdata = new FormData(document.getElementById("urlForm"));
