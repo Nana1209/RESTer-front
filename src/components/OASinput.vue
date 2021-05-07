@@ -23,7 +23,7 @@
               <div class="form-group text-center">
                 <label class="col-md-2 col-md-offset-2 control-label text-navy">API url</label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="url"/>
+                  <input type="text" class="form-control" name="url" placeholder="the url of API document"/>
                 </div>
               </div>
 
@@ -31,7 +31,7 @@
                 <label class="col-sm-2 col-md-offset-2 control-label text-navy">Category</label>
                 <div class="col-sm-6">
                   <select class="form-control" name="category">
-                    <option selected="selected">Please select             </option>
+                    <option selected="selected" value="">Please select             </option>
                     <option value="cloud">cloud (cloud, backend, IOT, iPAAS)</option>
                     <option value="open_data">open_data (open_data, storage, database, data)</option>
                     <option value="tools">tools (developer_tools, project_management, web site management, application development)</option>
@@ -62,14 +62,14 @@
               <div class="form-group">
                 <label class="col-sm-2 col-md-offset-2 control-label text-navy">API context</label>
                 <div class="col-sm-6">
-                  <textarea  class="form-control" rows="3" name="context"></textarea>
+                  <textarea  class="form-control" rows="3" name="context" placeholder="API document with OAS complied"></textarea>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-md-offset-2 control-label text-navy">Category</label>
                 <div class="col-sm-6">
                   <select class="form-control" name="category">
-                    <option selected="selected">Please select             </option>
+                    <option selected="selected" value="">Please select             </option>
                     <option value="cloud">cloud (cloud, backend, IOT, iPAAS)</option>
                     <option value="open_data">open_data (open_data, storage, database, data)</option>
                     <option value="tools">tools (developer_tools, project_management, web site management, application development)</option>
@@ -104,7 +104,7 @@
                   <div class="col-md-6">
 <!--                    <input id="file_upload" type="file" name="testfile">-->
                     <input id="file_upload" type="file" name="testfile" style="display: none;" onchange="document.getElementById('path').value=this.value">
-                    <input type="text" class="form-control " name="path" id="path" readonly>
+                    <input type="text" class="form-control " placeholder="yaml,json with OAS complied" name="path" id="path" readonly>
                   </div>
                   <div class="col-md-2">
                     <input class="btn btn-primary" type="button" value="choose a file" onclick="document.getElementById('file_upload').click()">
@@ -117,7 +117,7 @@
                 <label class="col-sm-2 col-md-offset-2 control-label text-navy">Category</label>
                 <div class="col-sm-6">
                   <select class="form-control" name="category">
-                    <option selected="selected">Please select             </option>
+                    <option selected="selected" value="">Please select             </option>
                     <option value="cloud">cloud (cloud, backend, IOT, iPAAS)</option>
                     <option value="open_data">open_data (open_data, storage, database, data)</option>
                     <option value="tools">tools (developer_tools, project_management, web site management, application development)</option>
@@ -166,6 +166,13 @@ export default {
   },
   methods: {
     submitFileForm() {
+      var filev=document.getElementById("fileupload")["testfile"].value;
+      var catev=document.getElementById("fileupload")["category"].value;
+      if (filev==null || filev=="" || catev==null || catev=="")
+      {
+        alert("file and category should be supplied");
+        return false;
+      }
       var formdatafile = new FormData(document.getElementById("fileupload"));
       axios
       //.post('http://39.104.105.27:8900/restapi-file',
@@ -187,6 +194,14 @@ export default {
       console.log("submit over");
     },
     textSubmitForm(){
+
+      var filev=document.getElementById("textForm")["context"].value;
+      var catev=document.getElementById("textForm")["category"].value;
+      if (filev==null || filev=="" || catev==null || catev=="")
+      {
+        alert("context and category should be supplied");
+        return false;
+      }
       var formdata = new FormData(document.getElementById("textForm"));
       axios.post(this.resterIP+'/restapi-text',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
       //axios.post('http://39.104.105.27:8900/restapi',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
@@ -207,6 +222,13 @@ export default {
       console.log("submit over");
     },
     urlSubmitForm(){
+      var filev=document.getElementById("urlForm")["url"].value;
+      var catev=document.getElementById("urlForm")["category"].value;
+      if (filev==null || filev=="" || catev==null || catev=="")
+      {
+        alert("url and category should be supplied");
+        return false;
+      }
       var formdata = new FormData(document.getElementById("urlForm"));
       axios
         .post(this.resterIP+'/restapi-url',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
