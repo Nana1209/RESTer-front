@@ -35,8 +35,7 @@
                     </div>
                   </form>
                 </div>
-                <div>
-                  <p style="font-size: 100px">{{Math.round(validateResult['score']*100)}}</p>
+                <div class="col-sm-6 " style="height:300px" id="echarts-score">
                 </div>
               </div>
             </div>
@@ -379,6 +378,7 @@ export default {
       statusCharts:null,
       barCharts:null,
       httpPieCharts:null,
+      scorePieCharts:null,
       icon:['fas','check']
     }
   },
@@ -654,6 +654,53 @@ export default {
       this.httpPieCharts = echarts.init(document.getElementById("echarts-pie-chart"));
       this.httpPieCharts.setOption(option);
     },
+    scorePie(){
+      console.log("in scorePie"+Math.round(this.validateResult['score']*100));
+      var option = {
+        title: {
+          text: Math.round(this.validateResult['score']*100),
+          subtext: 'score',
+          textStyle:{
+            color:'#008054',
+            fontWeight: 'bolder',
+            fontSize:'60'
+          },
+          subtextStyle:{
+            fontSize:'20'
+          },
+          itemGap:0,
+          x: 'center',
+          y:'center',
+
+        },
+        series: [
+          {
+            name: 'score',
+            type: 'pie',
+            radius: ['60%', '70%'],
+            label: {
+              color:'#008054',
+              formatter:'{@score}' ,
+              show: false,
+              position: 'center',
+              fontWeight: 'bolder',
+              fontSize:'60'
+            },
+            emphasis: {
+              show:false,
+              scale:false,
+            },
+            color:['#009e68','#d9d9d9'],
+            data: [
+              {value: Math.round(this.validateResult['score']*100), name: 'score'},
+              {value: 100-Math.round(this.validateResult['score']*100), name: '直接访问'}
+            ]
+          }
+        ]
+      };
+      this.scorePieCharts = echarts.init(document.getElementById("echarts-score"));
+      this.scorePieCharts.setOption(option);
+    },
     generatePathDetail() {
       console.log(this.validateResult['name']);
       $("#pathDetail").children().remove();
@@ -693,6 +740,7 @@ export default {
       this.generatePathDetail()
       this.rullBar()
       this.httpPie()
+      this.scorePie()
     })
   }
 }
