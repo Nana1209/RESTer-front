@@ -245,7 +245,7 @@ export default {
         .then(response => {
           this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
-          this.$router.push('/report')
+          this.$router.push('/hsreport')
         })
         .catch(
           function (error) { // 请求失败处理
