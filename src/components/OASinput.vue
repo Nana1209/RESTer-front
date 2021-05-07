@@ -160,17 +160,29 @@ export default {
   data(){
     return{
       validateResult:{},
-       resterIP:'http://39.104.105.27:8900',
+      resterIP:'http://39.104.105.27:8900',
       //resterIP:'http://localhost:8900',
     }
   },
   methods: {
     submitFileForm() {
       var filev=document.getElementById("fileupload")["testfile"].value;
+      var filesize=document.getElementById("fileupload")["testfile"].files[0].size;
+      console.log("filevalue"+filev);
+      console.log("size"+filesize);
+
       var catev=document.getElementById("fileupload")["category"].value;
       if (filev==null || filev=="" || catev==null || catev=="")
       {
         alert("file and category should be supplied");
+        return false;
+      }
+      if(filesize>31457280){
+        alert( "Please upload a file less than 30MB");
+        return false;
+      }
+      if(!(filev.indexOf("yaml")!=-1 || filev.indexOf("json")!=-1)){
+        alert( "Please upload a yaml or json file");
         return false;
       }
       var formdatafile = new FormData(document.getElementById("fileupload"));
