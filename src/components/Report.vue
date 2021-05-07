@@ -388,7 +388,6 @@ export default {
   name: "report",
   data(){
     return{
-      validateResult:this.$store.state.validateResult,
       // validateResult:null,
       datas:[],
       wordCloudCharts:null,
@@ -789,7 +788,6 @@ export default {
        this.httpPieCharts.setOption(option);
      },
     generatePathDetail() {
-       console.log(this.validateResult['name']);
       $("#pathDetail").children().remove();
       $.each(this.validateResult["path"], function (key, value) {
         var path = '<div class="panel panel-default">'+
@@ -833,18 +831,22 @@ export default {
   },
   created() {
     console.log("in created")
-
     //在页面加载时读取sessionStorage里的状态信息
-    if (sessionStorage.getItem('result')) {
+    if (typeof (this.validateResult.name)=='undefined' && sessionStorage.getItem('result')) {
       this.$store.commit('setDemoValue',JSON.parse(sessionStorage.getItem('result')));
       // this.$store.replaceState(Object.assign({}, this.$store.state.validateResult, JSON.parse(sessionStorage.getItem('result'))));
     }
-    console.log("data[name]"+this.validateResult['name']);
+    // console.log("data[name]"+this.validateResult['name']);
 
     //在页面刷新时将vuex里的信息保存到sessionStorage里
     window.addEventListener('beforeunload', () => {
       sessionStorage.setItem('result', JSON.stringify(this.$store.state.validateResult));
     });
+  },
+  computed: {
+    validateResult(){
+      return this.$store.state.validateResult
+    }
   }
 }
 </script>
