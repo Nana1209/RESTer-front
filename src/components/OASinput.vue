@@ -167,16 +167,15 @@ export default {
   methods: {
     submitFileForm() {
       var filev=document.getElementById("fileupload")["testfile"].value;
-      var filesize=document.getElementById("fileupload")["testfile"].files[0].size;
-      console.log("filevalue"+filev);
-      console.log("size"+filesize);
-
       var catev=document.getElementById("fileupload")["category"].value;
       if (filev==null || filev=="" || catev==null || catev=="")
       {
         alert("file and category should be supplied");
         return false;
       }
+      var filesize=document.getElementById("fileupload")["testfile"].files[0].size;
+      console.log("filevalue"+filev);
+      console.log("size"+filesize);
       if(filesize>31457280){
         alert( "Please upload a file less than 30MB");
         return false;
