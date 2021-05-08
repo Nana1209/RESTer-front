@@ -143,7 +143,7 @@
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
-          <div class="tab-pane fade in active"  id="hengshengapi">
+          <div class="tab-pane fade "  id="hengshengapi">
             <form id="hsapi">
               <div class="form-group">
                 <div class="row">
