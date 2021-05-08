@@ -226,8 +226,10 @@ export default {
       .post(this.resterIP+'/restapi-file',
         formdatafile,{headers:{"Access-Control-Allow-Origin": "*"}})
       .then(response => {
-        /*this.validateResult = response.data;
-        console.log("validateResult"+this.validateResult);*/
+          if(typeof(response.data.name)=='undefined'){
+            alert("wrong input.");
+            return false;
+          }
         this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
           this.$router.push('/report')
@@ -244,8 +246,7 @@ export default {
 
       var filev=document.getElementById("textForm")["context"].value;
       var catev=document.getElementById("textForm")["category"].value;
-      if (filev==null || filev=="" || catev==null || catev=="")
-      {
+      if (filev==null || filev=="" || catev==null || catev==""){
         alert("context and category should be supplied");
         return false;
       }
@@ -257,8 +258,14 @@ export default {
           'context':this.context
         }))*/
       .then(response => {
+        if(typeof(response.data.name)=='undefined'){
+          alert("wrong input.");
+          return false;
+        }
         this.$store.commit('setDemoValue',response.data);
-        console.log("states"+this.$store.state.validateResult);
+        // console.log("states"+this.$store.state.validateResult);
+        console.log("name"+response.data.name);
+
         this.$router.push('/report')
       })
         .catch(
@@ -295,6 +302,10 @@ export default {
       axios
         .post(this.resterIP+'/restapi-url',formdata,{headers:{"Access-Control-Allow-Origin": "*"}})
         .then(response => {
+          if(typeof(response.data.name)=='undefined'){
+            alert("wrong input.");
+            return false;
+          }
           this.$store.commit('setDemoValue',response.data);
           console.log("states"+this.$store.state.validateResult);
           this.$router.push('/report')
