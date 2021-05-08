@@ -9,14 +9,10 @@
       <div class="col-md-6 col-md-offset-3">
         <ul id="myTab" class="nav nav-tabs">
           <li><h3>choose a way</h3></li>
-          <li class="active">
-            <a href="#file" data-toggle="tab">
-              FILE
-            </a>
-          </li>
-          <li><a href="#url" data-toggle="tab">URL</a></li>
-          <li><a href="#text" data-toggle="tab">TEXT</a></li>
-          <li><a href="#hengshengapi" data-toggle="tab">HENG SHENG</a></li>
+          <li class="active"><a data-toggle="tab" href="#file" >FILE</a></li>
+          <li><a data-toggle="tab" href="#url" >URL</a></li>
+          <li><a data-toggle="tab" href="#text" >TEXT</a></li>
+          <li><a data-toggle="tab"href="#hengshengapi" >HTML</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
           <div class="tab-pane fade "  id="url">
@@ -149,7 +145,7 @@
                 <div class="row">
                   <label class="col-md-2 col-md-offset-2 control-label text-navy">HENGSHENG API url</label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="hsurl"/>
+                    <input type="text" class="form-control" name="hsurl" placeholder="the html of API introduction"/>
                   </div>
                 </div>
               </div>
