@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Report from '@/components/Report'
+import HSReport from '@/components/HSReport'
 import OASinput from "../components/OASinput";
 
 Vue.use(Router)
@@ -26,6 +27,11 @@ export default new Router({
       path: '/report',
       name: 'Report',
       component: Report
+    },
+    {
+      path: '/hsreport',
+      name: 'HSReport',
+      component: HSReport
     }
   ]
 })
