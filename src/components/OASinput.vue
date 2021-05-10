@@ -143,7 +143,7 @@
             <form id="hsapi">
               <div class="form-group">
                 <div class="row">
-                  <label class="col-md-2 col-md-offset-2 control-label text-navy">HENGSHENG API url</label>
+                  <label class="col-md-2 col-md-offset-2 control-label text-navy">HTML</label>
                   <div class="col-md-6">
                     <input type="text" class="form-control" name="hsurl" placeholder="the html of API introduction"/>
                   </div>

@@ -25,28 +25,30 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-                <div class="col-sm-12 " style="height:350px">
+                <div class="col-sm-6 b-r" style="height:350px">
                   <form class="form-horizontal">
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-primary">name</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-primary">name</label>
+                      <div class="col-sm-8">
                         <span class="form-control" id="apiName">{{validateResult['name']}}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-primary">category</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-primary">category</label>
+                      <div class="col-sm-8">
                         <span class="form-control" id="category">{{ validateResult['category'] }}</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label text-primary">OpenAPI Version</label>
-                      <div class="col-sm-5">
+                      <label class="col-sm-3 control-label text-primary">OpenAPI Version</label>
+                      <div class="col-sm-8">
                         <span class="form-control" id="openapiVersion">{{ validateResult['openapiVersion'] }}</span>
                       </div>
                     </div>
 
                   </form>
+                </div>
+                <div class="col-sm-6 " style="height:300px" id="echarts-score">
                 </div>
               </div>
             </div>
@@ -787,6 +789,53 @@ export default {
        this.httpPieCharts = echarts.init(document.getElementById("echarts-pie-chart"));
        this.httpPieCharts.setOption(option);
      },
+    scorePie(){
+      console.log("in scorePie"+Math.round(this.validateResult['score']*100));
+      var option = {
+        title: {
+          text: Math.round(this.validateResult['score']*100),
+          subtext: 'score',
+          textStyle:{
+            color:'#008054',
+            fontWeight: 'bolder',
+            fontSize:'60'
+          },
+          subtextStyle:{
+            fontSize:'20'
+          },
+          itemGap:0,
+          x: 'center',
+          y:'center',
+
+        },
+        series: [
+          {
+            name: 'score',
+            type: 'pie',
+            radius: ['60%', '70%'],
+            label: {
+              color:'#008054',
+              formatter:'{@score}' ,
+              show: false,
+              position: 'center',
+              fontWeight: 'bolder',
+              fontSize:'60'
+            },
+            emphasis: {
+              show:false,
+              scale:false,
+            },
+            color:['#009e68','#d9d9d9'],
+            data: [
+              {value: Math.round(this.validateResult['score']*100), name: 'score'},
+              {value: 100-Math.round(this.validateResult['score']*100), name: '直接访问'}
+            ]
+          }
+        ]
+      };
+      this.scorePieCharts = echarts.init(document.getElementById("echarts-score"));
+      this.scorePieCharts.setOption(option);
+    },
     generatePathDetail() {
       $("#pathDetail").children().remove();
       $.each(this.validateResult["path"], function (key, value) {
@@ -827,6 +876,7 @@ export default {
       this.barStatus()
       this.rullBar()
       this.httpPie()
+      this.scorePie()
     })
   },
   created() {
