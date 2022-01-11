@@ -430,8 +430,8 @@ export default {
     cateResult(){
       var that=this
       axios
-         .get('http://39.104.105.27:8900/empirical-result', {
-      //.get('http://localhost:8900/empirical-result', {
+      //   .get('http://39.104.105.27:8900/empirical-result', {
+      .get('http://localhost:8900/empirical-result', {
           headers:{"Access-Control-Allow-Origin": "*"},
           params: {
             category:this.category

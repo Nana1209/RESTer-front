@@ -1,8 +1,8 @@
 <template>
-  <div id="hsreport">
+  <div id="report">
     <div class="row dashboard-header eva-result" style=" margin-left: 20px;margin-right: 20px;background-color: #52806f">
       <div class="col-sm-12 text-center">
-        <span style="color: #ffffff; font-size: 30px; font-weight: 700">Evaluation Result</span>
+        <span style="color: #ffffff; font-size: 30px; font-weight: 700">Dynamic Evaluation Result</span>
         <a><span class="pull-right" style="color:#e7e7e7; font-size:15px;padding: 10px 0" @click="exportReportTemplet()" ><i class="fa fa-download"></i> PDF</span></a>
       </div>
     </div>
@@ -15,9 +15,9 @@
               <h2>Information</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
@@ -25,7 +25,7 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-                <div class="col-sm-6 b-r " style="height:350px">
+                <div class="col-sm-6 b-r" style="height:350px">
                   <form class="form-horizontal">
                     <div class="form-group">
                       <label class="col-sm-3 control-label text-primary">name</label>
@@ -33,39 +33,23 @@
                         <span class="form-control" id="apiName">{{validateResult['name']}}</span>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label text-primary">category</label>
+                      <div class="col-sm-8">
+                        <span class="form-control" id="category">{{ validateResult['category'] }}</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label text-primary">OpenAPI Version</label>
+                      <div class="col-sm-8">
+                        <span class="form-control" id="openapiVersion">{{ validateResult['openapiVersion'] }}</span>
+                      </div>
+                    </div>
+
                   </form>
                 </div>
-                <div class="col-sm-6 " style="height:300px" id="echarts-score">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="ibox float-e-margins" style="margin-bottom: 0px">
-            <div class="ibox-title">
-              <h2>Resource Design</h2>
-              <div class="ibox-tools">
-
-                <a data-toggle="modal" data-target="#myModal">
-                  <i class="fa fa-list-ul"></i>
-                </a>
-                <a class="collapse-link" onclick="mycollapse(this)">
-                  <i class="fa fa-chevron-up"></i>
-                </a>
-              </div>
-            </div>
-            <div class="ibox-content">
-              <div class="row">
                 <div class="col-sm-6 b-r" style="height:500px">
                   <form class="form-horizontal">
-
-
-
                     <div class="form-group">
                       <label class="col-sm-3 control-label text-danger">Total Paths</label>
                       <div class="col-sm-4">
@@ -90,136 +74,16 @@
                         <span class="form-control text-info" id="categoryAvgEndpoint">{{validateResult.categoryResult[1]}}</span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label text-navy">AVG Hierarchies</label>
-                      <div class="col-sm-4">
-                        <span class="form-control text-navy" id="avgHierarchies">{{validateResult['avgHierarchies']}}</span>
-                      </div>
-                      <div class="col-sm-4">
-                        <span class="form-control text-navy" id="categoryAvgHierarchies">{{validateResult.categoryResult[10]}}</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label text-navy">Has "api" in Host</label>
-                      <div class="col-sm-4">
-                        <span class="form-control text-navy" >{{validateResult['apiInServer']}}</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label text-navy">Contextualized Path</label>
-                      <div class="col-sm-4">
-                        <span class="form-control text-navy" >{{validateResult['contextualizedPath']}}</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label text-navy">Has Functional Query Parameters</label>
-                      <div class="col-sm-4">
-                        <span class="form-control text-navy" >{{validateResult['hasPagePara']}}</span>
-                      </div>
-                    </div>
+
                   </form>
                 </div>
-                <div class="col-sm-6">
-                  <div style="height:500px" id="echarts-bar-chart"></div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="ibox float-e-margins" style="margin-bottom: 0px">
-            <div class="ibox-title">
-              <h2>HTTP Interaction</h2>
-              <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
-                  <i class="fa fa-list-ul"></i>
-                </a>
-                <a class="collapse-link" onclick="mycollapse(this)">
-                  <i class="fa fa-chevron-up"></i>
-                </a>
-              </div>
-            </div>
-            <div class="ibox-content">
-              <div class="row">
-                <div class="col-sm-6 col-sm-offset-2 ">
-                  <div style="height:400px" id="echarts-pie-chart"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="wrapper wrapper-content animated fadeInRight eva-result" style="padding-top: 10px; padding-bottom: 0px">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="ibox float-e-margins" style="margin-bottom: 0px">
-            <div class="ibox-title">
-              <h2>HTTP message</h2>
-              <div class="ibox-tools">
-
-                <a data-toggle="modal" data-target="#myModal">
-                  <i class="fa fa-list-ul"></i>
-                </a>
-                <a class="collapse-link" onclick="mycollapse(this)">
-                  <i class="fa fa-chevron-up"></i>
-                </a>
-              </div>
-            </div>
-            <div class="ibox-content">
-              <div class="row">
-                <div class="col-sm-6 b-r">
-                  <div style="height:300px" id="headerTable">
-                    <table class="table table-hover">
-                      <thead>
-                      <tr>
-                        <th>Header</th><th>Realized</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th>Accept</th><th><i v-bind:class="validateResult['hasAccept']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      <tr>
-                        <th>Authorization</th><th><i v-bind:class="validateResult['hasAuthorization']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      <tr>
-                        <th>Key</th><th><i v-bind:class="validateResult['hasKey']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      <tr>
-                        <th>Token</th><th><i v-bind:class="validateResult['hasToken']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div style="height:300px" id="bodyTable">
-                    <table class="table table-hover">
-                      <thead>
-                      <tr>
-                        <th>Body</th><th>Realized</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th>HATEOAS</th><th><i v-bind:class="validateResult['hateoas']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="wrapper wrapper-content animated fadeInRight eva-result" style=" padding-top: 10px; padding-bottom: 0px">
       <div class="row">
         <div class="col-sm-12">
@@ -228,65 +92,23 @@
               <h2>Nonfunctional design</h2>
               <div class="ibox-tools">
 
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
+                </a>-->
                 <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
               </div>
             </div>
             <div class="ibox-content">
-              <div class="row">
-                <div class="col-sm-6 b-r">
-                  <div style="height:160px" id="versionTable">
-                    <table class="table table-hover">
-                      <thead>
-                      <tr>
-                        <th>Version</th>
-                      </tr>
 
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th>location</th>
-                        <th>{{validateResult['versionInPath']?'Path ':''}}{{validateResult['versionInHeader']?'Header ':''}}{{validateResult['versionInQueryPara']?'Query Parameter ':''}}{{validateResult['versionInHost']?'Host':''}}</th>
-                      </tr>
-                      <tr>
-                        <th>
-                          Semantic Version
-                        </th><th><i v-bind:class="validateResult['semanticVersion']?'fas fa-check':'fas fa-times'"/></th>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div style="height:160px" id="securityTable">
-                    <table class="table table-hover">
-                      <thead>
-                      <tr>
-                        <th>Security</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th>Schema</th><th>{{validateResult['securityList']}}</th>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                </div>
-
-              </div>
               <div class="row">
                 <div class="col-sm-12">
                   <div style="height:300px" id="cacheTable">
                     <table class="table table-hover">
                       <thead>
                       <tr>
-                        <th>Cache</th>
+                        <th>Cache-dynamic</th>
                       </tr>
                       <tr>
                         <th>Strong cache</th><th>Realized</th><th>Negotiation cache</th><th>Realized</th>
@@ -294,13 +116,13 @@
                       </thead>
                       <tbody>
                       <tr>
-                        <th>Cache-Control</th><th><i v-bind:class="validateResult['hasCacheControl']?'fas fa-check':'fas fa-times'"/></th><th>Etag</th><th><i v-bind:class="validateResult['hasEtag']?'fas fa-check':'fas fa-times'"/></th>
+                        <th>Cache-Control</th><th><i v-bind:class="validateResult['hasCacheControl-dy']?'fas fa-check':'fas fa-times'"/></th><th>Etag</th><th><i v-bind:class="validateResult['hasEtag-dy']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Expires</th><th><i v-bind:class="validateResult['hasExpires']?'fas fa-check':'fas fa-times'"/></th><th>Last-Modified</th><th><i v-bind:class="validateResult['hasLastModified']?'fas fa-check':'fas fa-times'"/></th>
+                        <th>Expires</th><th><i v-bind:class="validateResult['hasExpires-dy']?'fas fa-check':'fas fa-times'"/></th><th>Last-Modified</th><th><i v-bind:class="validateResult['hasLastModified-dy']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       <tr>
-                        <th>Date</th><th><i v-bind:class="validateResult['hasDate']?'fas fa-check':'fas fa-times'"/></th>
+                        <th>Date</th><th><i v-bind:class="validateResult['hasDate-dy']?'fas fa-check':'fas fa-times'"/></th>
                       </tr>
                       </tbody>
                     </table>
@@ -320,10 +142,10 @@
             <div class="ibox-title">
               <h2>Detailed result</h2>
               <div class="ibox-tools">
-                <a data-toggle="modal" data-target="#myModal">
+                <!--<a data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-list-ul"></i>
-                </a>
-                <a class="collapse-link">
+                </a>-->
+                <a class="collapse-link" onclick="mycollapse(this)">
                   <i class="fa fa-chevron-up"></i>
                 </a>
 
@@ -371,14 +193,12 @@ export default {
   name: "report",
   data(){
     return{
-      // validateResult:this.$store.state.validateResult,
       // validateResult:null,
       datas:[],
       wordCloudCharts:null,
       statusCharts:null,
       barCharts:null,
       httpPieCharts:null,
-      scorePieCharts:null,
       icon:['fas','check']
     }
   },
@@ -386,7 +206,7 @@ export default {
 
     exportReportTemplet:function() {
       console.log("in pdrexport")
-      var element = $("#hsreport");    // 这个dom元素是要导出pdf的div容器
+      var element = $("#report");    // 这个dom元素是要导出pdf的div容器
       var w = element.width();    // 获得该容器的宽
       var h = element.height();    // 获得该容器的高
       var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
@@ -501,6 +321,124 @@ export default {
       });*/
 
 
+    },
+    wordCloud(){
+      var status;
+      for(status in this.validateResult.status){
+        var data={};
+        data['name']=status;
+        data['value']=this.validateResult.status[status];
+        this.datas.push(data);
+      }
+      this.wordCloudCharts=echarts.init(document.getElementById('echarts-status-wordcloud'));
+      this.wordCloudCharts.setOption({
+        title: {
+          text: 'Frequency of Status Code'
+        },
+        tooltip: {},
+        series: [{
+          type: 'wordCloud',
+          gridSize: 2,
+          sizeRange: [12, 50],
+          // rotationRange: [-90, 90],
+          rotationRange: [-50, 50],
+          shape: 'triangle',
+          // width: 100,
+          // height: 400,
+          textStyle: {
+            normal: {
+              color: function () {
+                return 'rgb(' + [
+                  Math.round(Math.random() * 160),
+                  Math.round(Math.random() * 160),
+                  Math.round(Math.random() * 160)
+                ].join(',') + ')';
+              }
+            },
+            emphasis: {
+              shadowBlur: 10,
+              shadowColor: '#333'
+            }
+          },
+          data: this.datas
+        }]
+      })
+    },
+    barStatus(){
+      this.statusCharts=echarts.init(document.getElementById("echarts-statusUsage-bar"));
+      this.statusCharts.setOption({
+        title: {
+          text: 'Usage of Status Code',
+          subtext: '',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c}%"
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Proportion of Status Codes(%)']
+        },
+        xAxis:{
+          name:'Status',
+          axisLabel: {					//---坐标轴 标签
+            show: true,					//---是否显示
+            interval: 0,                //---强制显示所有标签
+            inside: false,				//---是否朝内
+            rotate: 0,					//---旋转角度
+            margin: 5,					//---刻度标签与轴线之间的距离
+            //color:'red',				//---默认取轴线的颜色
+          },
+          data:["2XX","3XX","4XX","5XX"]
+        },
+        yAxis:{
+          name:'Rate',				//---轴名称
+          type:'value',			//---轴类型，默认'category'
+          axisLabel: {
+            show: true,
+            interval: 'auto',
+            formatter: '{value} %'
+          },
+        },
+        series: [
+          {
+            name: 'Rate',
+            type: 'bar',
+            itemStyle:{					//---图形形状
+              color: function(params) {
+                // build a color map as your need.
+                var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                return colorList[params.dataIndex]
+              }
+
+            },
+            barWidth:'40%',
+            z:10,
+            data: [this.validateResult.statusUsage[1]/this.validateResult.statusUsage[0]*100,
+              this.validateResult.statusUsage[2]/this.validateResult.statusUsage[0]*100,
+              this.validateResult.statusUsage[3]/this.validateResult.statusUsage[0]*100,
+              this.validateResult.statusUsage[4]/this.validateResult.statusUsage[0]*100]
+
+          }/*,
+            {
+              name: 'catrgoryAvgRate',
+              type: 'bar',
+              itemStyle:{					//---图形形状
+                barBorderRadius: [25, 25, 0, 0],
+                color: '#cdcdcd'
+
+              },
+              barGap:'-100%',
+              barWidth:'80%',
+              data: [validateResult.categoryResult[13]*100,validateResult.categoryResult[14]*100,validateResult.categoryResult[15]*100,
+                validateResult.categoryResult[16]*100,validateResult.categoryResult[17]*100,validateResult.categoryResult[18]*100,
+                validateResult.categoryResult[19]*100]
+
+            }*/
+        ]
+      });
     },
     rullBar(){
       var option = {
@@ -702,9 +640,10 @@ export default {
       this.scorePieCharts.setOption(option);
     },
     generatePathDetail() {
-      console.log(this.validateResult['name']);
       $("#pathDetail").children().remove();
-      $.each(this.validateResult["path"], function (key, value) {
+      //key:method+" "+pathName
+      //value:
+      $.each(this.validateResult["path-dy"], function (key, value) {
         var path = '<div class="panel panel-default">'+
           '<div class="panel-heading"><h5>'+key+'</h5></div>'+
           '<div class="panel-body"><p></p></div>'+
@@ -715,13 +654,8 @@ export default {
           '</tr>'+
           '</thead>'+
           '<tbody id="detailBody">'+
-          '<tr><th>1</th><th>no_</th><th>MUST</th><th>'+value["no_"]+'</th><th>Use "-" to split</th></tr>'+
-          '<tr><th>2</th><th>lowercase</th><th>MUST</th><th>'+value["lowercase"]+'</th><th></th></tr>'+
-          '<tr><th>3</th><th>noVersion</th><th>RECOMMENDED</th><th>'+value["noVersion"]+'</th><th>Recommended to identify the version information in Header</th></tr>'+
-          '<tr><th>4</th><th>noAPI</th><th>MUST</th><th>'+value["noapi"]+'</th><th></th></tr>'+
-          '<tr><th>5</th><th>noCRUD</th><th>SHOULD</th><th>'+value["noCRUD"]+'</th><th>'+value["CRUDlist"]+'</th></tr>'+
-          '<tr><th>6</th><th>noSuffix</th><th>MUST</th><th>'+value["noSuffix"]+'</th><th>'+value["suffixList"]+'</th></tr>'+
-          '<tr><th>7</th><th>noEnd/</th><th>MUST</th><th>'+value["noend/"]+'</th><th></th></tr>'+
+          '<tr><th>1</th><th>status</th><th>MUST</th><th>'+value["status"]+'</th><th>Use "-" to split</th></tr>'+
+
           '</tbody>'+
           '</table>'+
           '</div>';
@@ -738,6 +672,8 @@ export default {
       console.log("in mounted")
       // data.validateResult=this.$store.state.validateResult
       this.generatePathDetail()
+      this.wordCloud()
+      this.barStatus()
       this.rullBar()
       this.httpPie()
       this.scorePie()
@@ -7727,4 +7663,3 @@ body.skin-3 {
   vertical-align: middle;
 }
 </style>
-

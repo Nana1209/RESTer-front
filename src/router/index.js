@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Report from '@/components/Report'
 import HSReport from '@/components/HSReport'
 import OASinput from "../components/OASinput";
+import DynamicReport from "../components/DynamicReport";
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/report',
       name: 'Report',
       component: Report
+    },
+    {
+      path: '/dynamicreport',
+      name: 'DynamicReport',
+      component: DynamicReport
     },
     {
       path: '/hsreport',

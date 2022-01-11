@@ -136,6 +136,7 @@
               </div>
 <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
               <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
+              <input class="btn btn-primary" type="button" @click="submitFileFormDynamic()" value="EVALUATE"/>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
@@ -196,8 +197,8 @@ export default {
   data(){
     return{
       validateResult:{},
-      resterIP:'http://39.104.105.27:8900',
-      //resterIP:'http://localhost:8900',
+      //resterIP:'http://39.104.105.27:8900',
+      resterIP:'http://localhost:8900',
     }
   },
   methods: {
@@ -222,7 +223,6 @@ export default {
       }
       var formdatafile = new FormData(document.getElementById("fileupload"));
       axios
-      //.post('http://39.104.105.27:8900/restapi-file',
       .post(this.resterIP+'/restapi-file',
         formdatafile,{headers:{"Access-Control-Allow-Origin": "*"}})
       .then(response => {
@@ -316,7 +316,51 @@ export default {
           }
         );
       console.log("submit over");
-    }
+    },
+    /**
+     * 对说明文档进行动态分析
+     * @returns {boolean}
+     */
+    submitFileFormDynamic() {
+      var filev=document.getElementById("fileupload")["testfile"].value;
+      var catev=document.getElementById("fileupload")["category"].value;
+      if (filev==null || filev=="" || catev==null || catev=="")
+      {
+        alert("file and category should be supplied");
+        return false;
+      }
+      var filesize=document.getElementById("fileupload")["testfile"].files[0].size;
+      console.log("filevalue"+filev);
+      console.log("size"+filesize);
+      if(filesize>31457280){
+        alert( "Please upload a file less than 30MB");
+        return false;
+      }
+      if(!(filev.indexOf("yaml")!=-1 || filev.indexOf("json")!=-1)){
+        alert( "Please upload a yaml or json file");
+        return false;
+      }
+      var formdatafile = new FormData(document.getElementById("fileupload"));
+      axios
+        .post(this.resterIP+'/restapi-dynamic-file',
+          formdatafile,{headers:{"Access-Control-Allow-Origin": "*"}})
+        .then(response => {
+            if(typeof(response.data.name)=='undefined'){
+              alert("wrong input.");
+              return false;
+            }
+            this.$store.commit('setDemoValue',response.data);
+            console.log("states"+this.$store.state.validateResult);
+            this.$router.push('/dynamicreport')
+          }
+        )
+        .catch(
+          function (error) { // 请求失败处理
+            console.log(error);
+          }
+        );
+      console.log("submit over");
+    },
   }
 }
 </script>
