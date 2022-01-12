@@ -136,7 +136,7 @@
               </div>
 <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
               <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
-              <input class="btn btn-primary" type="button" @click="submitFileFormDynamic()" value="EVALUATE"/>
+              <input class="btn btn-primary" type="button" @click="submitFileFormDynamic()" value="DYNAMIC EVALUATE"/>
               <!--<p> <button id="jquery_post">jquery提交</button></p>-->
             </form>
           </div>
