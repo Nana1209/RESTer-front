@@ -35,6 +35,11 @@ export default new Router({
       component: DynamicReport
     },
     {
+      path: '/consistentreport',
+      name: 'ConsistentReport',
+      component: ConsistentReport
+    },
+    {
       path: '/hsreport',
       name: 'HSReport',
       component: HSReport
