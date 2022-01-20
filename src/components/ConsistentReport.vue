@@ -860,10 +860,104 @@ export default {
           '</table>'+
           '</div>';
         $("#pathDetail").append(path);
+      });
+      $.each(this.validateResult["path-dy"], function (key, value) {
+        var path = '<div class="panel panel-default">'+
+          '<div class="panel-heading"><h5>'+key+'</h5></div>'+
+          '<div class="panel-body"><p></p></div>'+
+          '<table class="table table-hover">'+
+          '<thead>'+
+          '<tr>'+
+          '<th>#</th><th>Standard</th><th>Degree</th><th>realized</th><th>note</th>'+
+          '</tr>'+
+          '</thead>'+
+          '<tbody id="detailBody">'+
+          '<tr><th>1</th><th>status</th><th>MUST</th><th>'+value["status"]+'</th><th>Use "-" to split</th></tr>'+
+
+          '</tbody>';
+
+        if(value["status"]>="200" && value["status"]<="299"){
+          path+=
+            '<thead>'+
+            '<tr>'+
+            '<tr><th>1</th><th>hasCacheScheme</th><th>MUST</th><th>'+value["hasCacheScheme"]+'</th><th>has cache header</th></tr>'+
+            '</tr>'+
+            '</thead>'+
+            '<tbody >'+
+            '<tr><th>1</th><th>hasEtag</th><th>MUST</th><th>'+value["hasEtag"]+'</th><th>has cache header Etag</th></tr>'+
+            '<tr><th>1</th><th>hasDate</th><th>MUST</th><th>'+value["hasDate"]+'</th><th>has cache header Date</th></tr>'+
+            '<tr><th>1</th><th>hasExpires</th><th>MUST</th><th>'+value["hasExpires"]+'</th><th>has cache header Expires</th></tr>'+
+            '<tr><th>1</th><th>hasLastModified</th><th>MUST</th><th>'+value["hasLastModified"]+'</th><th>has cache header LastModified</th></tr>'+
+            '<tr><th>1</th><th>hasCacheControl</th><th>MUST</th><th>'+value["hasCacheControl"]+'</th><th>has cache header CacheControl</th></tr>'+
+            '</tbody>'+
+            '<thead>'+
+            '<tr>'+
+            '<tr><th>1</th><th>hasContentType</th><th>MUST</th><th>'+value["hasContentType"]+'</th><th>has ContentType</th></tr>'+
+            '</tr>'+
+            '</thead>'+
+            '<tbody >'+
+            '<tr><th>1</th><th>contentType</th><th>MUST</th><th>'+value["contentType"]+'</th><th>contentType</th></tr>'+
+            '<tr><th>1</th><th>isHATEOAS</th><th>MUST</th><th>'+value["isHATEOAS-dy"]+'</th><th>isHATEOAS</th></tr>'+
+
+            '</tbody>';
+        }
+        path+='</table>'+
+          '</div>';
+
+        $("#pathDetail").append(path);
 
 
 
       });
+      $.each(this.validateResult["path-dy"], function (key, value) {
+        var path = '<div class="panel panel-default">'+
+          '<div class="panel-heading"><h5>'+key+'</h5></div>'+
+          '<div class="panel-body"><p></p></div>'+
+          '<table class="table table-hover">'+
+          '<thead>'+
+          '<tr>'+
+          '<th>#</th><th>Standard</th><th>Degree</th><th>response realized</th><th>OAS realized</th><th>note</th>'+
+          '</tr>'+
+          '</thead>'+
+          '<tbody id="detailBody">'+
+          '<tr><th>1</th><th>status</th><th>MUST</th><th>'+value["status"]+'</th><th></th></tr>'+
+
+          '</tbody>';
+
+        if(value["status"]>="200" && value["status"]<="299"){
+          path+=
+            '<thead>'+
+            '<tr>'+
+            '<tr><th>1</th><th>hasCacheScheme</th><th>MUST</th><th>'+value["hasCacheScheme"]+'</th><th>has cache header</th></tr>'+
+            '</tr>'+
+            '</thead>'+
+            '<tbody >'+
+            '<tr><th>1</th><th>hasEtag</th><th>MUST</th><th>'+value["hasEtag"]+'</th><th>'+value.hasOwnProperty("hasEtagStatic")?value["hasEtagStatic"]:" "+'</th><th>has cache header Etag</th></tr>'+
+            '<tr><th>1</th><th>hasDate</th><th>MUST</th><th>'+value["hasDate"]+'</th><th>\'+value.hasOwnProperty("hasDateStatic")?value["hasDateStatic"]:" "+\'</th><th>has cache header Date</th></tr>'+
+            '<tr><th>1</th><th>hasExpires</th><th>MUST</th><th>'+value["hasExpires"]+'</th><th>\'+value.hasOwnProperty("hasExpiresStatic")?value["hasExpiresStatic"]:" "+\'</th><th>has cache header Expires</th></tr>'+
+            '<tr><th>1</th><th>hasLastModified</th><th>MUST</th><th>'+value["hasLastModified"]+'</th><th>\'+value.hasOwnProperty("hasLastModifiedStatic")?value["hasLastModifiedStatic"]:" "+\'</th><th>has cache header LastModified</th></tr>'+
+            '<tr><th>1</th><th>hasCacheControl</th><th>MUST</th><th>'+value["hasCacheControl"]+'</th><th>\'+value.hasOwnProperty("hasCacheControlStatic")?value["hasCacheControlStatic"]:" "+\'</th><th>has cache header CacheControl</th></tr>'+
+            '</tbody>'+
+            '<thead>'+
+            '<tr>'+
+            '<tr><th>1</th><th>hasContentType</th><th>MUST</th><th>'+value["hasContentType"]+'</th><th>\'+value.hasOwnProperty("hasContentTypeStatic")?value["hasContentTypeStatic"]:" "+\'</th><th>has ContentType</th></tr>'+
+            '</tr>'+
+            '</thead>'+
+            '<tbody >'+
+            '<tr><th>1</th><th>contentType</th><th>MUST</th><th>'+value["contentType"]+'</th><th>contentType</th></tr>'+
+            '<tr><th>1</th><th>isHATEOAS</th><th>MUST</th><th>'+value["isHATEOAS-dy"]+'</th><th>\'+value.hasOwnProperty("hateoasStatic")?value["hateoasStatic"]:" "+\'</th><th>isHATEOAS</th></tr>'+
+
+            '</tbody>';
+        }
+        path+='</table>'+
+          '</div>';
+
+        $("#pathDetail").append(path);
+
+
+
+      });
+
     }
 
   },

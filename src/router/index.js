@@ -5,6 +5,7 @@ import Report from '@/components/Report'
 import HSReport from '@/components/HSReport'
 import OASinput from "../components/OASinput";
 import DynamicReport from "../components/DynamicReport";
+import ConsistentReport from "../components/ConsistentReport";
 
 Vue.use(Router)
 
