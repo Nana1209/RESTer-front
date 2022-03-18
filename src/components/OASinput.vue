@@ -135,10 +135,14 @@
                 </div>
               </div>
 <!--              <router-link to="/report"><input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/></router-link>-->
-              <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
-              <input class="btn btn-primary" type="button" @click="submitFileFormDynamic()" value="DYNAMIC EVALUATE"/>
-              <input class="btn btn-primary" type="button" @click="submitFileFormConsistent()" value="CONSISTENT EVALUATE"/>
-              <!--<p> <button id="jquery_post">jquery提交</button></p>-->
+              <div class="form-group">
+                <div>
+                <input class="btn btn-primary" type="button" @click="submitFileForm()" value="EVALUATE"/>
+                </div>
+                <input class="btn btn-primary" type="button" @click="submitFileFormDynamic()" value="DYNAMIC EVALUATE"/>
+                <input class="btn btn-primary" type="button" @click="submitFileFormConsistent()" value="CONSISTENT EVALUATE"/>
+                <!--<p> <button id="jquery_post">jquery提交</button></p>-->
+              </div>
             </form>
           </div>
           <div class="tab-pane fade "  id="hengshengapi">

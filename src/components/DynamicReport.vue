@@ -646,44 +646,25 @@ export default {
       $.each(this.validateResult["path-dy"], function (key, value) {
         var path = '<div class="panel panel-default">'+
           '<div class="panel-heading"><h5>'+key+'</h5></div>'+
-          '<div class="panel-body"><p></p></div>'+
           '<table class="table table-hover">'+
           '<thead>'+
-          '<tr>'+
-          '<th>#</th><th>Standard</th><th>Degree</th><th>realized</th><th>note</th>'+
-          '</tr>'+
+          '<tr><th>status</th><th>'+value["status"]+'</th></tr>'+
           '</thead>'+
-          '<tbody id="detailBody">'+
-          '<tr><th>1</th><th>status</th><th>MUST</th><th>'+value["status"]+'</th><th>Use "-" to split</th></tr>'+
-
-          '</tbody>';
+          '<tbody id="detailBody">';
 
         if(value["status"]>="200" && value["status"]<="299"){
           path+=
-            '<thead>'+
-            '<tr>'+
-            '<tr><th>1</th><th>hasCacheScheme</th><th>MUST</th><th>'+value["hasCacheScheme"]+'</th><th>has cache header</th></tr>'+
-            '</tr>'+
-            '</thead>'+
-            '<tbody >'+
-            '<tr><th>1</th><th>hasEtag</th><th>MUST</th><th>'+value["hasEtag"]+'</th><th>has cache header Etag</th></tr>'+
-            '<tr><th>1</th><th>hasDate</th><th>MUST</th><th>'+value["hasDate"]+'</th><th>has cache header Date</th></tr>'+
-            '<tr><th>1</th><th>hasExpires</th><th>MUST</th><th>'+value["hasExpires"]+'</th><th>has cache header Expires</th></tr>'+
-            '<tr><th>1</th><th>hasLastModified</th><th>MUST</th><th>'+value["hasLastModified"]+'</th><th>has cache header LastModified</th></tr>'+
-            '<tr><th>1</th><th>hasCacheControl</th><th>MUST</th><th>'+value["hasCacheControl"]+'</th><th>has cache header CacheControl</th></tr>'+
-            '</tbody>'+
-            '<thead>'+
-            '<tr>'+
-            '<tr><th>1</th><th>hasContentType</th><th>MUST</th><th>'+value["hasContentType"]+'</th><th>has ContentType</th></tr>'+
-            '</tr>'+
-            '</thead>'+
-            '<tbody >'+
-            '<tr><th>1</th><th>contentType</th><th>MUST</th><th>'+value["contentType"]+'</th><th>contentType</th></tr>'+
-            '<tr><th>1</th><th>isHATEOAS</th><th>MUST</th><th>'+value["isHATEOAS-dy"]+'</th><th>isHATEOAS</th></tr>'+
-
-            '</tbody>';
+            '<tr><th>1</th><th>hasCacheScheme</th><th>'+value["hasCacheScheme"]+'</th><th>has cache header</th></tr>'+
+            '<tr><th>1.1</th><th>hasEtag</th><th>'+value["hasEtag"]+'</th><th>has cache header Etag</th></tr>'+
+            '<tr><th>1.2</th><th>hasDate</th><th>'+value["hasDate"]+'</th><th>has cache header Date</th></tr>'+
+            '<tr><th>1.3</th><th>hasExpires</th><th>'+value["hasExpires"]+'</th><th>has cache header Expires</th></tr>'+
+            '<tr><th>1.4</th><th>hasLastModified</th><th>'+value["hasLastModified"]+'</th><th>has cache header LastModified</th></tr>'+
+            '<tr><th>1.5</th><th>hasCacheControl</th><th>'+value["hasCacheControl"]+'</th><th>has cache header CacheControl</th></tr>'+
+            '<tr><th>2</th><th>hasContentType</th><th>'+value["hasContentType"]+'</th><th>has ContentType</th></tr>'+
+            '<tr><th>2.1</th><th>contentType</th><th>'+value["contentType"]+'</th><th>contentType</th></tr>'+
+            '<tr><th>3</th><th>isHATEOAS</th><th>'+value["isHATEOAS-dy"]+'</th><th>isHATEOAS</th></tr>';
         }
-        path+='</table>'+
+        path+='</tbody></table>'+
         '</div>';
 
         $("#pathDetail").append(path);
