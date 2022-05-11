@@ -44,6 +44,11 @@ export default new Router({
       path: '/hsreport',
       name: 'HSReport',
       component: HSReport
-    }
+    },
+    {
+      path: '/rad',
+      name: 'Rad',
+      component: Rad
+    },
   ]
 })
